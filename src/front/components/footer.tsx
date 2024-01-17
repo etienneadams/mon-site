@@ -1,38 +1,36 @@
 import React from 'react';
+import Colors from '../colors/colors.tsx';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
-    const firstName = 'VotrePrénom';
-    const lastName = 'VotreNom';
+    const firstName = 'Etienne';
+    const lastName = 'ADAMCZUK';
 
     // CSS
+    const colors = Colors();
+
     const footerStyle: React.CSSProperties = {
         padding: '10px',
-        backgroundColor: '#f2f2f2',
+        backgroundColor: colors.lighterGray,
         position: 'fixed',
         bottom: '0',
         width: '100%',
-        height: '5%',
     };
 
     const footerContentStyle: React.CSSProperties = {
-
+        display: 'flex',
+        justifyContent: 'space-between', // Pour espacer les éléments
+        alignItems: 'center', // Pour centrer le texte verticalement
     };
 
-
     return (
-        <footer style={footerStyle}>
+        <div style={footerStyle}>
             <div style={footerContentStyle}>
-                <p>Sigle Certified</p>
-                <p>Tous droits réservés © {currentYear}</p>
-                <p>{firstName} {lastName}</p>    
+                <p>© Tous droits réservés {currentYear}</p>
+                <p>by {firstName} {lastName}</p>
             </div>
-        
-        </footer>
+        </div>
     );
 };
 
-
-
 export default Footer;
-

@@ -1,33 +1,53 @@
 import * as React from "react";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import logo from '../../assets/etienne-adamczuk-logo.png';
-import { Tabs, Tab, AppBar } from "@mui/material";
+import { Tabs, Tab } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Colors from "../../colors/colors.tsx";
 
-const Navbar: FunctionComponent = () => {
-    const [value, setValue] = React.useState('accueil');
+type Props = {
+    page: string;
+};
+
+const Navbar: FunctionComponent<Props> = (props: Props) => {
+    const [value, setValue] = useState<string>(props.page);
+    const navigate = useNavigate();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
-    // CSS
+    useEffect(() => {
+        navigate(`/${value}`);
+        console.log(value);
+    }, [value, navigate]);
 
+    // CSS
+    const colors = Colors();
+
+    const divStyle: React.CSSProperties = {
+        backgroundColor: colors.lighterGray,
+        display: 'flex',
+        alignItems: 'center',
+    };
 
     const imgStyle: React.CSSProperties = {
-        width: '10%',
+        height: '10vh',
         paddingLeft: '10px',
     };
 
     return (
-        <AppBar color="transparent">
+        <div style={divStyle}>
             <img style={imgStyle} src={logo} alt="logo" />
-            <Tabs value={value} onChange={handleChange} centered>
-                <Tab value="accueil" label="Accueil" />
-                <Tab value="parcours" label="Parcours" />
-                <Tab value="jeux" label="Jeux" />
-                <Tab value="contact" label="Contact" />
-            </Tabs>
-        </AppBar>
+            <div>
+                <Tabs value={value} onChange={handleChange} centered>
+                    <Tab value="accueil" label="Accueil" />
+                    <Tab value="parcours" label="Parcours" />
+                    <Tab value="jeux" label="Jeux" />
+                    <Tab value="contact" label="Contact" />
+                </Tabs>
+            </div>
+        </div>
     );
 };
 

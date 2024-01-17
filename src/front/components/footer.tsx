@@ -12,7 +12,6 @@ const Footer = () => {
     const footerStyle: React.CSSProperties = {
         padding: '10px',
         backgroundColor: colors.lighterGray,
-        position: 'fixed',
         bottom: '0',
         width: '100%',
     };

@@ -40,11 +40,11 @@ const Navbar: FunctionComponent<Props> = (props: Props) => {
         <div style={divStyle}>
             <img style={imgStyle} src={logo} alt="logo" />
             <div>
-                <Tabs value={value} onChange={handleChange} centered>
-                    <Tab value="accueil" label="Accueil" />
-                    <Tab value="parcours" label="Parcours" />
-                    <Tab value="jeux" label="Jeux" />
-                    <Tab value="contact" label="Contact" />
+                <Tabs value={value} onChange={handleChange} centered style={{color: colors.mainGreen}}>
+                    <Tab value="accueil" label="Accueil" style={{color: colors.mainGreen}}/>
+                    <Tab value="parcours" label="Parcours" style={{color: colors.mainGreen}}/>
+                    <Tab value="jeux" label="Jeux" style={{color: colors.mainGreen}}/>
+                    <Tab value="contact" label="Contact" style={{color: colors.mainGreen}}/>
                 </Tabs>
             </div>
         </div>

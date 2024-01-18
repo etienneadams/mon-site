@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const ContactPage = () => {
     const [open, setOpen] = useState(false);
-    const [mailValue, setMailValue] = useState<string>();
+    const [mailValue] = useState<string>();
 
 
     const handleOpen = () => {
@@ -34,7 +34,7 @@ const ContactPage = () => {
 
     const bodyStyle: React.CSSProperties = {
         backgroundColor: colors.lightGray,
-        height: '75vh',
+        height: '80vh',
         alignItems: 'center',
         margin: 'auto',
         display: 'flex',
@@ -70,7 +70,7 @@ const ContactPage = () => {
                 <Navbar page={"contact"}/>
             </header>
             <body style={bodyStyle}>
-                <Box sx={{ width: '80vw'}}>
+                <Box sx={{ width: '60vw'}}>
                     <Card variant='outlined' style={cardStyle}>
                         <CardHeader style={cardHeaderStyle} title={'Me Contacter'}/>
                         <CardContent style={contactLinkStyle}>

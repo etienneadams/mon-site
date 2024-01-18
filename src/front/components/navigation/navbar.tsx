@@ -2,7 +2,7 @@ import * as React from "react";
 import { FunctionComponent, useState, useEffect } from "react";
 import logo from '../../assets/etienne-adamczuk-logo.png';
 import { Tabs, Tab } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Colors from "../../colors/colors.tsx";
 
 type Props = {
@@ -26,7 +26,6 @@ const Navbar: FunctionComponent<Props> = (props: Props) => {
     const colors = Colors();
 
     const divStyle: React.CSSProperties = {
-        backgroundColor: colors.lighterGray,
         display: 'flex',
         alignItems: 'center',
     };
@@ -38,7 +37,9 @@ const Navbar: FunctionComponent<Props> = (props: Props) => {
 
     return (
         <div style={divStyle}>
-            <img style={imgStyle} src={logo} alt="logo" />
+            <Link to={"/accueil"}>
+                <img style={imgStyle} src={logo} alt="logo" />
+            </Link>
             <div>
                 <Tabs value={value} onChange={handleChange} centered style={{color: colors.mainGreen}}>
                     <Tab value="accueil" label="Accueil" style={{color: colors.mainGreen}}/>

@@ -70,7 +70,7 @@ const GameCard: FunctionComponent<Props> = (props: Props) => {
                         <List>
                             <ListItem style={{marginBottom: '-30px'}}>
                                 <Icon component={SportsEsportsIcon}/>
-                                <p style={{marginLeft: '10px'}}>{props.rules}</p>
+                                <p style={{marginLeft: '10px', width: '200px'}}>{props.rules}</p>
                             </ListItem>
                             <ListItem style={{marginBottom: '-30px'}}>
                                 <Icon component={EmojiEventsIcon} />

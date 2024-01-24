@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.word-letter {
+  margin-right: 10px; /* Ajustez la marge selon votre préférence */
+}

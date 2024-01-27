@@ -1,22 +1,143 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
+import Texts from "../../components/game/texts.tsx";
+import Colors from "../../colors/colors.tsx";
+import { Button, Card } from "@mui/material";
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import { Link } from "react-router-dom";
+import EndGameDialog from "../../components/game/endGameDialog.tsx";
 
 const MorpionGamePage = () => {
-    const drawerGoalText = 'Le but du jeu Morpion est d\'aligner trois symboles identiques horizontalement, verticalement ou en diagonale sur une grille de 3x3 cases. Les deux joueurs, l\'un utilisant les "X" et l\'autre les "O", alternent pour placer leurs symboles sur la grille. Le premier joueur qui parvient à aligner trois de ses symboles remporte la partie.';
-    const drawerHowPrePhraseText = 'Le joueur choisit entre le mode 1 joueur (contre l\'ordinateur) et le mode 2 joueurs (joueur contre joueur) :';
-    const drawerHow = ['Le Morpion se joue sur une grille de 3x3 cases, créant ainsi neuf positions possibles.',
-                       'Les joueurs prennent tour à tour leur tour pour placer leur symbole sur une case vide.',
-                       'L\'objectif est d\'aligner trois de ses symboles (soit "X" soit "O") horizontalement, verticalement ou en diagonale avant l\'adversaire.'];
-    const drawerEndText = 'La partie se termine dès qu\'un joueur réussit à aligner trois de ses symboles ou si la grille est remplie sans qu\'aucun joueur ne parvienne à aligner trois symboles.';
+    const playerTurn = [1,2]
+    const initialBoard = Array(9).fill(0);
+    const [board, setBoard] = useState<number[]>(Array(9).fill(0));
+    const [currentTurn, setCurrentTurn] = useState(playerTurn[1])
+    const [gameWon, setGameWon] = useState(false);
+    const [winner, setWinner] = useState<number | null>(null);
+
+    const texts = Texts();
+
+    const width = '10vw'
+    const height = '10vw'
+
+    const form = (value: number) => value === 1 ? <ClearRoundedIcon sx={{width: '100%', height: '100%'}}/> : value === 2 ? <CircleOutlinedIcon sx={{width: '100%', height: '100%'}}/> : null;
+
+    const renderBoard = () => {
+        return board.map((value, index) => (
+            <Card key={index} style={{ width: width, height: height, margin: 'auto' }} onClick={() => handleClick(index)}>
+                {form(value)}
+            </Card>
+        ));
+    };
+
+    const handleClick = (index: number) => {
+        if (!board[index]) {
+            const newBoard = [...board];
+            newBoard[index] = currentTurn;
+            setBoard(newBoard);
+            setCurrentTurn(currentTurn === 1 ? 2 : 1);
+        }
+    };
+
+    const restart = () => {
+        setBoard(initialBoard);
+        setCurrentTurn(playerTurn[0]);
+        setGameWon(false);
+        setWinner(null);
+    };
+
+    useEffect(() => {
+        const checkWinner = () => {
+            // Vérifier les lignes
+            for (let i = 0; i < 3; i++) {
+                if (board[i * 3] === board[i * 3 + 1] && board[i * 3] === board[i * 3 + 2] && board[i * 3] !== 0) {
+                    setWinner(board[i * 3]);
+                    console.log(board[i * 3]);
+                    setGameWon(true);
+                    return;
+                }
+            }
+
+            // Vérifier les colonnes
+            for (let i = 0; i < 3; i++) {
+                if (board[i] === board[i + 3] && board[i] === board[i + 6] && board[i] !== 0) {
+                    setWinner(board[i]);
+                    console.log(board[i]);
+                    setGameWon(true);
+                    return;
+                }
+            }
+
+            // Vérifier les diagonales
+            if ((board[0] === board[4] && board[0] === board[8]) || (board[2] === board[4] && board[2] === board[6])) {
+                if (board[4] !== 0) {
+                    setWinner(board[4]);
+                    console.log(board[4]);
+                    setGameWon(true);
+                    return;
+                }
+            }
+        };
+
+        checkWinner();
+    }, [board]);
+
+    
+
+
+    // CSS
+
+    const colors = Colors();
+
+    const bodyStyle: React.CSSProperties = {
+        backgroundColor: colors.lighterGray,
+        height: '80vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+    };
+
+    const gameboardStyle: React.CSSProperties = {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3,3fr)',
+        gap: '5px',
+    };
+
+    const buttonDivStyle: React.CSSProperties = {
+        justifyContent: 'center',
+        display: 'flex',
+        marginTop: '20px',
+    };
+
+    const buttonStyle: React.CSSProperties = {
+        backgroundColor: colors.mainGreen,
+        color: 'white',
+        fontSize: '12px',
+        margin: '0px 100px',
+    };
+
 
     return (
         <>
             <header>
-                <GameNavbar drawerGoal={drawerGoalText} drawerHowPrePhrase={drawerHowPrePhraseText} drawerHow={drawerHow} drawerEnd={drawerEndText}  />
+                <GameNavbar drawerGoal={texts.morpionGoalText} drawerHowPrePhrase={texts.morpionHowPrePhraseText} drawerHow={texts.morpionHow} drawerEnd={texts.morpionEndText}  />
             </header>
-            <body>
-                Morpion
+            <body style={bodyStyle}>
+                <div style={gameboardStyle}>
+                    {renderBoard()}
+                </div>
+                <div style={buttonDivStyle}>
+                    <Button style={buttonStyle} onClick={restart}> Rejouer </Button>
+                    <Link to="/jeux">
+                        <Button style={buttonStyle}> Quitter </Button>
+                    </Link>
+                </div>
+                {gameWon && (
+                    <EndGameDialog title={'Bravo'} content={`Le joueur ${winner} a gagné !`} onClick={restart} />
+                )}
             </body>
             <footer>
                 <Footer />

@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardContent, Divider, Icon, List, ListItem } from "@mui/material";
 import React from "react";
 import { FunctionComponent } from "react";
-import Colors from "../colors/colors.tsx";
+import Colors from "../../colors/colors.tsx";
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Link } from "react-router-dom";
@@ -15,6 +15,12 @@ type Props = {
 
 const GameCard: FunctionComponent<Props> = (props: Props) => {
 
+    const greenFirstLetter = (name: string) => {
+        let firstLetter = name.substring(0,1)
+        return (
+            <p><b style={firstLetterStyle}>{firstLetter}</b>{name.substring(1)}</p>
+        );
+    }
 
     //CSS 
 
@@ -29,13 +35,16 @@ const GameCard: FunctionComponent<Props> = (props: Props) => {
 
     const cardContentStyle: React.CSSProperties = {
         textAlign: 'center', 
-        margin: 'auto',
     };
 
     const titleStyle: React.CSSProperties = {
         fontWeight: 'bold',
         textAlign: 'center', 
         justifyItems: 'center',
+    };
+
+    const firstLetterStyle: React.CSSProperties = {
+        color: colors.mainGreen,
     };
 
     const rulesStyle: React.CSSProperties = {
@@ -58,11 +67,11 @@ const GameCard: FunctionComponent<Props> = (props: Props) => {
 
 
     return (
-        <Box color={colors.mainGreen} sx={{width: '60vw'}}>
-            <Card>
+        <Box color={colors.mainGreen} sx={{width: '60vw', marginTop: '20px'}}>
+            <Card style={{border: 'solid 1px'}}>
                 <span style={spanStyle}>
                     <CardContent style={cardContentStyle}>
-                        <p style={titleStyle}>{props.title}</p>
+                        <p style={titleStyle}>{greenFirstLetter(props.title)}</p>
                     </CardContent>
                     <Divider orientation="vertical" flexItem/> 
                     <CardContent>

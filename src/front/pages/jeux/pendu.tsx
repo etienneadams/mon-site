@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
-import { Alert, AlertTitle, Button, FormControlLabel, Icon, Switch, TextField } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Alert, AlertTitle, Button, FormControlLabel, Icon, IconButton, Switch, TextField } from '@mui/material';
 import GameNavbar from '../../components/navigation/gameNavbar.tsx';
 import Footer from '../../components/footer.tsx';
 import Colors from '../../colors/colors.tsx';
 import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import EndGameDialog from '../../components/game/endGameDialog.tsx';
+import Texts from '../../components/game/texts.tsx';
+
 
 const PenduGamePage = () => {
-    const words = ['lunette', 'ordinateur', 'tableau', 'serpilliere', 'chocolat', 'etude', 'evenement', 'maison', 'obligation', 'polyvalence', 'twingo'];
-    const drawerGoalText = 'Le but du jeu du pendu est de trouver un mot secret en devinant les lettres qui le composent. Le mot est initialement caché, représenté par des tirets ou des espaces vides, un pour chaque lettre du mot. Le joueur doit proposer des lettres, une à la fois, en essayant de deviner quelles lettres sont présentes dans le mot secret.';
-    const drawerEndText = 'Le joueur gagne la partie s\'il parvient à deviner toutes les lettres du mot secret avant d\'atteindre le nombre maximum d\'erreurs autorisées.';
-    const drawerHowPrePhraseText = 'Le joueur choisit entre le mode <b>Clavier</b> et le mode sans :';
-    const drawerHow = ['Le joueur propose une lettre en tapant la lettre souhaitée suivi de la touche \'Entrée\' sur le clavier physique ou en cliquant sur la case correspondante sur le clavier virtuel.',
-                       'Après chaque proposition de lettre, le jeu vérifie si la lettre est présente dans le mot secret. Si c\'est le cas, les occurrences de cette lettre sont révélées dans le mot, et le joueur peut proposer une autre lettre.',
-                       'Si la lettre proposée n\'est pas dans le mot secret, une erreur est comptabilisée. Le nombre d\'erreurs est représenté graphiquement par des coeurs roses.',
-                       'Le joueur a un nombre limité d\'erreurs autorisées (6). Si le joueur atteint ce nombre d\'erreurs sans avoir deviné correctement le mot secret, la partie est perdue.'];
+    const texts = Texts();
+    
     const [word, setWord] = useState(() => {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    return words[randomIndex];
+        const randomIndex = Math.floor(Math.random() * texts.penduWords.length);
+        return texts.penduWords[randomIndex].toLowerCase();        
     });
+    console.log('word = ',word)
 
     const [listWord, setListWord] = useState([...word]);
     const [strTry, setStrTry] = useState('');
@@ -29,7 +27,28 @@ const PenduGamePage = () => {
     const [cpt, setCpt] = useState(0);
     const [letterInput, setLetterInput] = useState('');
     const [clickedLetters, setClickedLetters] = useState<string[]>([]);
-    const [ switchChecked, setSwitchChecked] = useState<boolean>(false);
+    const [switchChecked, setSwitchChecked] = useState<boolean>(true);
+    const [gameWon, setGameWon] = useState(false);
+    const [gameLost, setGameLost] = useState(false);
+
+    useEffect(() => {
+        if (life === 0) {
+            setGameLost(true);
+        }
+    }, [life]);
+
+    useEffect(() => {
+        let answer;
+        for (const i of listAnswer) {
+            if (i !== null) {
+                answer = listAnswer.join('');
+            }
+        }
+
+        if (answer === word) {
+            setGameWon(true);
+        }
+    }, [listAnswer, word]);
 
     const renderWordToDiscover = () => {
         return listAnswer.map((char, index) => (
@@ -40,10 +59,6 @@ const PenduGamePage = () => {
             </span>
         ));
     };
-
-    const handleKeyboardClick = (letter) => {
-        handleLetterInput(letter);
-      };
 
     const handleLetterInput = (letter) => {
         if (life > 0 && !completed) {
@@ -104,28 +119,22 @@ const PenduGamePage = () => {
     return lifeIcons;
     };
 
-    const Verif = () => {
-    let answer;
-    for (const i of listAnswer) {
-        if (i !== null) {
-            answer = listAnswer.join('');
-        } else {
-            console.log('You found any letter of the word');
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleLetterInput(letterInput);
+            setLetterInput('');
         }
-    }
-
-    if (answer === word) {
-        console.log(`Congratulations! The word was ${answer}, you succeed in ${attempt} attempts`);
-    } else {
-        console.log('You lose, you can retry');
-    }
     };
 
-    const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-        handleLetterInput(letterInput);
-        setLetterInput('');
-    }
+    const handleKeyClick = (key: string) => {
+        // Mettre à jour les touches cliquées
+        handleLetterInput(key);
+        setClickedLetters([...clickedLetters, key.toLowerCase()]);
+    };
+
+    const isKeyClicked = (key: string) => {
+        // Vérifier si la touche a déjà été cliquée
+        return clickedLetters.includes(key.toLowerCase());
     };
 
     const renderKeyboard = () => {
@@ -133,14 +142,33 @@ const PenduGamePage = () => {
         return alphabet.split('').map((letter, index) => (
           <Button
             key={index}
-            onClick={() => handleLetterInput(letter)}
-            disabled={clickedLetters.includes(letter)}
-            style={keysStyle}
+            onClick={() => handleKeyClick(letter.toLowerCase())}
+            disabled={isKeyClicked(letter)}
+            style={{ margin: '2px', backgroundColor: isKeyClicked(letter) ? colors.disabledBlue : colors.royalBlue , color: 'white'}}
           >
             {letter}
           </Button>
         ));
-      };
+    };
+
+    const resetGame = () => {
+        const randomIndex = Math.floor(Math.random() * texts.penduWords.length);
+        const newWord = texts.penduWords[randomIndex];  // Sélectionnez un nouveau mot
+    
+        setWord(newWord);
+        setListWord([...newWord]);
+        setStrTry('');
+        setListAnswer(Array(newWord.length).fill(null));
+        setAttempt(0);
+        setLife(8);
+        setCompleted(false);
+        setCpt(0);
+        setLetterInput('');
+        setClickedLetters([]);
+        setGameWon(false);
+        setGameLost(false);
+    };    
+
 
     // CSS
 
@@ -158,40 +186,40 @@ const PenduGamePage = () => {
     const guessStyle: React.CSSProperties = {
         display: 'flex',
         justifyContent: 'center',
-        paddingTop: '30px',
+        paddingTop: '60px',
+        height: '100px',
     };
 
     const tryDivStyle: React.CSSProperties = {
         wordSpacing: '20px',
+        margin: '30px 20px',
     };
 
     const keyboardStyle: React.CSSProperties = {
         margin: 'auto',
         justifyContent: 'center',
         width: '650px',
-    };
-
-    const keysStyle: React.CSSProperties = {
-        //backgroundColor: 'blue',
-        //color: 'white',
-        margin: '2px',
+        height: '150px',
     };
 
     const buttonDivStyle: React.CSSProperties = {
         justifyContent: 'center',
         display: 'flex',
+        marginTop: '10px',
     };
 
     const buttonStyle: React.CSSProperties = {
         backgroundColor: colors.mainGreen,
         color: 'white',
         fontSize: '12px',
+        margin: '0px 100px',
     };
+
 
     return (
     <>
         <header>
-            <GameNavbar drawerGoal={drawerGoalText} drawerHowPrePhrase={drawerHowPrePhraseText} drawerHow={drawerHow} drawerEnd={drawerEndText} />
+            <GameNavbar drawerGoal={texts.penduGoalText} drawerHowPrePhrase={texts.penduHowPrePhraseText} drawerHow={texts.penduHow} drawerEnd={texts.penduEndText} />
         </header>
         <body style={bodyStyle}>
             <div style={switchStyle}>
@@ -200,32 +228,42 @@ const PenduGamePage = () => {
             <div style={guessStyle}>
                 {renderWordToDiscover()}
             </div>
-            <div style={tryDivStyle}>
-                <p>Essais: </p>
-                {renderTriedLetters()}
-            </div>
-            <div>
-                {renderLifeIcons()}
-            </div>
-            {!switchChecked ? 
-                <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <p>Enter a letter: </p>
-                    <TextField type="text" size='small' style={{width: '50px'}} value={letterInput} onChange={(e) => setLetterInput(e.target.value)} onKeyDown={handleKeyDown} />
-                </div>
-            : null}
-            
-            {switchChecked ? 
-                <div style={keyboardStyle}>
-                    {renderKeyboard()}
-                </div>
-            : null}
-            <button onClick={Verif}>Verify</button>
+            {switchChecked ?
+                <>
+                    <div style={{marginBottom: '30px'}}>
+                        {renderLifeIcons()}
+                    </div>
+                    <div style={keyboardStyle}>
+                        {renderKeyboard()}
+                    </div>
+                </>
+            :   
+                <>
+                    <div style={tryDivStyle}>
+                        <p>Essais: </p>
+                        {renderTriedLetters()}
+                    </div>
+                    <div style={{marginBottom: '30px'}}>
+                        {renderLifeIcons()}
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <p>Enter a letter: </p>
+                        <TextField type="text" size='small' style={{width: '50px'}} value={letterInput} onChange={(e) => setLetterInput(e.target.value)} onKeyDown={handleKeyDown} />
+                    </div>
+                </>
+            }
             <div style={buttonDivStyle}>
-                <Button style={buttonStyle}> Rejouer </Button>
+                <Button style={buttonStyle} onClick={resetGame}> Rejouer </Button>
                 <Link to="/jeux">
                     <Button style={buttonStyle}> Quitter </Button>
                 </Link>
             </div>
+            {gameWon && (
+                <EndGameDialog title={'Bravo'} content={texts.penduWinText} onClick={resetGame} />
+            )}
+            {gameLost && (
+                <EndGameDialog title={'Perdu'} content={texts.penduLoseText} onClick={resetGame} secretWord={word}/>
+            )}
             </body>
             <footer>
                 <Footer />

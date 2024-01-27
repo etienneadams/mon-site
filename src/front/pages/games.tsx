@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/footer.tsx";
 import Navbar from "../components/navigation/navbar.tsx";
 import Colors from "../colors/colors.tsx";
-import GameCard from "../components/gameCard.tsx";
+import GameCard from "../components/game/gameCard.tsx";
 import TicTacToeImage from "../assets/Tic Tac Toe.png";
 import P4Image from "../assets/Puissance 4.png";
 import PenduImage from "../assets/Pendu.png";

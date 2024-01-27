@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, AlertTitle, Button, FormControlLabel, Icon, IconButton, Switch, TextField } from '@mui/material';
+import { Alert, AlertTitle, Button, FormControlLabel, Icon, Switch, TextField } from '@mui/material';
 import GameNavbar from '../../components/navigation/gameNavbar.tsx';
 import Footer from '../../components/footer.tsx';
 import Colors from '../../colors/colors.tsx';

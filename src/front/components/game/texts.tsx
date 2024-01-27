@@ -30,11 +30,21 @@ const texts = () => {
                        'L\'objectif est d\'aligner trois de ses symboles (soit "X" soit "O") horizontalement, verticalement ou en diagonale avant l\'adversaire.'];
     const morpionEndText = 'La partie se termine dès qu\'un joueur réussit à aligner trois de ses symboles ou si la grille est remplie sans qu\'aucun joueur ne parvienne à aligner trois symboles.';
 
+    // Puissance 4
+    const puissance4GoalText = 'Le but du jeu Puissance 4 est d\'aligner quatre jetons de sa propre couleur horizontalement, verticalement ou en diagonale sur une grille verticale. Deux joueurs s\'affrontent en plaçant tour à tour leurs jetons dans une colonne de la grille. Le premier joueur qui réussit à aligner quatre de ses jetons remporte la partie.';
+    const puissance4HowPrePhraseText = 'Le joueur choisit entre le mode 1 joueur (contre l\'ordinateur) et le mode 2 joueurs (joueur contre joueur) :';
+    const puissance4How = ['Le Puissance 4 se joue sur une grille verticale de 7 colonnes et 6 lignes, créant ainsi 42 positions possibles.',
+                       'Les joueurs alternent pour placer un jeton de leur couleur dans l\'une des colonnes vides de la grille.',
+                       'L\'objectif est d\'aligner quatre jetons de sa propre couleur horizontalement, verticalement ou en diagonale avant l\'adversaire.'];
+    const puissance4EndText = 'La partie se termine dès qu\'un joueur réussit à aligner quatre de ses jetons ou si la grille est remplie sans qu\'aucun joueur ne parvienne à aligner quatre jetons.';
+
+
 
     // light mode
 
     return {penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
-            morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText};
+            morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText,
+            puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText};
 }
 
 export default texts;

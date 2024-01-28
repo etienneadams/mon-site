@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
 import Texts from "../../components/game/texts.tsx";
@@ -17,16 +17,6 @@ const Puissance4GamePage = () => {
     const [currentTurn, setCurrentTurn] = useState(playerTurn[1])
     const [gameWon, setGameWon] = useState(false);
     const [winner, setWinner] = useState<number | null>(null);
-    const formColors = [colors.red, colors.green, colors.purple, colors.yellow]
-    /*const [formColorP1, setFormColorP1] = useState(() => {
-        const randomIndex = Math.floor(Math.random() * formColors.length);
-        return formColors[randomIndex];        
-    });
-    const [formColorP2, setFormColorP2] = useState(() => {
-        const randomIndex = Math.floor(Math.random() * formColors.length);
-        return formColors[randomIndex];        
-    });
-    */
 
     
     const width = '50px'
@@ -64,8 +54,78 @@ const Puissance4GamePage = () => {
             setCurrentTurn(currentTurn === 1 ? 2 : 1);
         }
     };
+        
+    useEffect(() => {
+        const checkWinner = () => {
+            // Vérification horizontale
+            for (let row = 0; row < 6; row++) {
+                for (let col = 0; col < 4; col++) {
+                    if (
+                        board[row * 7 + col] === board[row * 7 + col + 1] &&
+                        board[row * 7 + col] === board[row * 7 + col + 2] &&
+                        board[row * 7 + col] === board[row * 7 + col + 3] &&
+                        board[row * 7 + col] !== 0
+                    ) {
+                        setWinner(board[row * 7 + col]);
+                        setGameWon(true);
+                        return;
+                    }
+                }
+            }
     
-
+            // Vérification verticale
+            for (let col = 0; col < 7; col++) {
+                for (let row = 0; row < 3; row++) {
+                    if (
+                        board[row * 7 + col] === board[(row + 1) * 7 + col] &&
+                        board[row * 7 + col] === board[(row + 2) * 7 + col] &&
+                        board[row * 7 + col] === board[(row + 3) * 7 + col] &&
+                        board[row * 7 + col] !== 0
+                    ) {
+                        setWinner(board[row * 7 + col]);
+                        setGameWon(true);
+                        return;
+                    }
+                }
+            }
+    
+            // Vérification diagonale (ascendante)
+            for (let col = 0; col < 4; col++) {
+                for (let row = 3; row < 6; row++) {
+                    if (
+                        board[row * 7 + col] === board[(row - 1) * 7 + col + 1] &&
+                        board[row * 7 + col] === board[(row - 2) * 7 + col + 2] &&
+                        board[row * 7 + col] === board[(row - 3) * 7 + col + 3] &&
+                        board[row * 7 + col] !== 0
+                    ) {
+                        setWinner(board[row * 7 + col]);
+                        setGameWon(true);
+                        return;
+                    }
+                }
+            }
+    
+            // Vérification diagonale (descendante)
+            for (let col = 0; col < 4; col++) {
+                for (let row = 0; row < 3; row++) {
+                    if (
+                        board[row * 7 + col] === board[(row + 1) * 7 + col + 1] &&
+                        board[row * 7 + col] === board[(row + 2) * 7 + col + 2] &&
+                        board[row * 7 + col] === board[(row + 3) * 7 + col + 3] &&
+                        board[row * 7 + col] !== 0
+                    ) {
+                        setWinner(board[row * 7 + col]);
+                        setGameWon(true);
+                        return;
+                    }
+                }
+            }
+        };
+    
+        checkWinner();
+    }, [board]);
+    
+    
     const restart = () => {
         setBoard(initialBoard);
         setCurrentTurn(playerTurn[0]);

@@ -16,7 +16,6 @@ const PenduGamePage = () => {
         const randomIndex = Math.floor(Math.random() * texts.penduWords.length);
         return texts.penduWords[randomIndex].toLowerCase();        
     });
-    console.log('word = ',word)
 
     const [listWord, setListWord] = useState([...word]);
     const [strTry, setStrTry] = useState('');

@@ -18,30 +18,23 @@ const Puissance4GamePage = () => {
     const [gameWon, setGameWon] = useState(false);
     const [winner, setWinner] = useState<number | null>(null);
     const formColors = [colors.red, colors.green, colors.purple, colors.yellow]
-    const [formColorP1, setFormColorP1] = useState<string>()
-    const [formColorP2, setFormColorP2] = useState<string>()
+    /*const [formColorP1, setFormColorP1] = useState(() => {
+        const randomIndex = Math.floor(Math.random() * formColors.length);
+        return formColors[randomIndex];        
+    });
+    const [formColorP2, setFormColorP2] = useState(() => {
+        const randomIndex = Math.floor(Math.random() * formColors.length);
+        return formColors[randomIndex];        
+    });
+    */
 
     
     const width = '50px'
     const height = '50px'
+    const formColorP1 = colors.red
+    const formColorP2 = colors.yellow
 
     const texts = Texts();
-
-    const setColorP1 = () => {
-        const randomIndex = Math.floor(Math.random() * formColors.length);
-        setFormColorP1(formColors[randomIndex])
-    };
-
-    const setColorP2 = () => {
-        let randomIndex = Math.floor(Math.random() * formColors.length);
-        while (formColors[randomIndex] === formColorP1) {
-            randomIndex = Math.floor(Math.random() * formColors.length);
-        }
-        setFormColorP2(formColors[randomIndex])
-    };
-
-    setColorP1()
-    setColorP2()
 
     const form = (value: number) => value === 1 ? <CircleIcon sx={{width: '100%', height: '100%', color: formColorP1}}/> : value === 2 ? <CircleIcon sx={{width: '100%', height: '100%', color: formColorP2}}/> : null;
 
@@ -54,13 +47,24 @@ const Puissance4GamePage = () => {
     };
 
     const handleClick = (index: number) => {
-        if (!board[index]) {
+        const colIndex = index % 7; // Determine la colonne
+        let rowIndex = 0;
+        for (let i = 5; i >= 0; i--) {
+            const currentIndex = i * 7 + colIndex;
+            if (!board[currentIndex]) {
+                rowIndex = currentIndex;
+                break;
+            }
+        }
+    
+        if (!board[rowIndex]) {
             const newBoard = [...board];
-            newBoard[index] = currentTurn;
+            newBoard[rowIndex] = currentTurn;
             setBoard(newBoard);
             setCurrentTurn(currentTurn === 1 ? 2 : 1);
         }
     };
+    
 
     const restart = () => {
         setBoard(initialBoard);
@@ -84,7 +88,7 @@ const Puissance4GamePage = () => {
     const gameboardStyle: React.CSSProperties = {
         display: 'grid',
         gridTemplateColumns: 'repeat(7,6fr)',
-        gap: '5px',
+        gap: '2px',
     };
 
     const buttonDivStyle: React.CSSProperties = {
@@ -107,7 +111,7 @@ const Puissance4GamePage = () => {
                 <GameNavbar drawerGoal={texts.puissance4GoalText} drawerHowPrePhrase={texts.puissance4HowPrePhraseText} drawerHow={texts.puissance4How} drawerEnd={texts.puissance4EndText}  />
             </header>
             <body style={bodyStyle}>
-                <p style={{backgroundColor: currentTurn === 1 ? 'red' : 'yellow', color: 'white', borderRadius: '10px', padding: '10px'}}> Tour du joueur {currentTurn}</p>
+                <p style={{backgroundColor: currentTurn === 1 ? formColorP1 : formColorP2, color: 'black', borderRadius: '10px', padding: '10px'}}> Tour du joueur {currentTurn}</p>
                 <div style={gameboardStyle}>
                     {renderBoard()}
                 </div>

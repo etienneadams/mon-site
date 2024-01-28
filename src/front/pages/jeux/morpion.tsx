@@ -136,7 +136,7 @@ const MorpionGamePage = () => {
                     </Link>
                 </div>
                 {gameWon && (
-                    <EndGameDialog title={'Bravo'} content={`Le joueur ${winner} a gagné !`} onClick={restart} />
+                    <EndGameDialog title={'Bravo'} content={`Le joueur ${winner} a gagné `} onClick={restart} />
                 )}
             </body>
             <footer>

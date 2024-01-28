@@ -10,7 +10,14 @@ const Colors = () => {
     const disabledBlue = 'rgba(143, 187, 250, 1)';
     const royalBlue = 'rgba(54, 122, 222, 1)';
 
-    return {mainGreen, lightGray, gray, lighterGray, royalBlue, disabledBlue};
+    // Puissance 4
+    const red = 'rgba(255, 79, 72, 1)';
+    const yellow = 'rgba(241, 238, 79, 1)';
+    const green = 'rgba(97, 225, 103, 1)';
+    const purple = 'rgba(161, 97, 225, 1)';
+
+    return {mainGreen, lightGray, gray, lighterGray, royalBlue, disabledBlue,
+            red, yellow, green, purple};
 }
 
 export default Colors;

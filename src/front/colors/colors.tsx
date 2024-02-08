@@ -16,8 +16,14 @@ const Colors = () => {
     const green = 'rgba(97, 225, 103, 1)';
     const purple = 'rgba(161, 97, 225, 1)';
 
+    // Demineur
+    const bombRed = 'rgba(186, 61, 50, 1)';
+    const lightGrass = 'rgba(161, 219, 134, 1)';
+    const turquoise = 'rgba(58, 129, 161, 1)';
+
     return {mainGreen, lightGray, gray, lighterGray, royalBlue, disabledBlue,
-            red, yellow, green, purple};
+            red, yellow, green, purple,
+            bombRed, lightGrass, turquoise};
 }
 
 export default Colors;

@@ -176,14 +176,14 @@ const Puissance4GamePage = () => {
                     {renderBoard()}
                 </div>
                 <div style={buttonDivStyle}>
-                <Button style={buttonStyle} onClick={restart}> Rejouer </Button>
-                <Link to="/jeux">
-                    <Button style={buttonStyle}> Quitter </Button>
-                </Link>
-            </div>
-            {gameWon && (
-                <EndGameDialog title={'Bravo'} content={`Le joueur ${winner} a gagné `} onClick={restart} />
-            )}
+                    <Button style={buttonStyle} onClick={restart}> Rejouer </Button>
+                    <Link to="/jeux">
+                        <Button style={buttonStyle}> Quitter </Button>
+                    </Link>
+                </div>
+                {gameWon && (
+                    <EndGameDialog title={'Bravo'} content={`Le joueur ${winner} a gagné `} onClick={restart} />
+                )}
             </body>
             <footer>
                 <Footer />

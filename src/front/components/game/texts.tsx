@@ -38,13 +38,23 @@ const texts = () => {
                        'L\'objectif est d\'aligner quatre jetons de sa propre couleur horizontalement, verticalement ou en diagonale avant l\'adversaire.'];
     const puissance4EndText = 'La partie se termine dès qu\'un joueur réussit à aligner quatre de ses jetons ou si la grille est remplie sans qu\'aucun joueur ne parvienne à aligner quatre jetons.';
 
+    // Demineur
+    const demineurGoalText = 'Le but du jeu Démineur est de découvrir toutes les cases libres sur une grille sans déclencher de mines cachées. Le joueur doit utiliser des indices numériques pour éviter les cases piégées et marquer celles qui en sont certainement.';
+    const demineurHow = ['Le Démineur se joue sur une grille rectangulaire composée de cases. Certaines cases contiennent des mines, tandis que d\'autres sont vides.',
+                       'Le joueur commence en sélectionnant une case pour la découvrir. Cette action révèle soit une case vide, soit un numéro indiquant le nombre de mines adjacentes.',
+                       'Si un joueur découvre une case piégée, la partie est terminée, et toutes les mines sont révélées.',
+                       'Les cases numérotées indiquent le nombre de mines présentes dans les cases adjacentes (horizontalement, verticalement et en diagonale).',
+                       'Le joueur peut marquer les cases qu\'il soupçonne de contenir une mine en plaçant un drapeau sur celles-ci. Cela permet d\'éviter de les découvrir accidentellement.',
+                       'Le joueur continue de découvrir les cases et de marquer les mines jusqu\'à ce que toutes les cases libres soient révélées, remportant ainsi la partie.'];
+    const demineurEndText = 'La partie se termine si un joueur découvre une case contenant une mine alors la partie est perdue ou si tous les espaces libres sont découverts sans déclencher de mine alors la partie est remportée.';
 
 
     // light mode
 
     return {penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
             morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText,
-            puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText};
+            puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,
+            demineurGoalText, demineurHow, demineurEndText};
 }
 
 export default texts;

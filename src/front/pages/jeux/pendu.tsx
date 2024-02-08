@@ -126,13 +126,11 @@ const PenduGamePage = () => {
     };
 
     const handleKeyClick = (key: string) => {
-        // Mettre à jour les touches cliquées
         handleLetterInput(key);
         setClickedLetters([...clickedLetters, key.toLowerCase()]);
     };
 
     const isKeyClicked = (key: string) => {
-        // Vérifier si la touche a déjà été cliquée
         return clickedLetters.includes(key.toLowerCase());
     };
 

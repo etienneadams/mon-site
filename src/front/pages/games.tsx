@@ -8,6 +8,7 @@ import P4Image from "../assets/Puissance 4.png";
 import PenduImage from "../assets/Pendu.png";
 import BombImage from "../assets/minesweeper.jpg";
 import TravleImage from "../assets/travle.png";
+import SudokuImage from "../assets/sudoku.png";
 
 const GamePage = () => {
 
@@ -33,6 +34,7 @@ const GamePage = () => {
                 <GameCard title={"Puissance 4"} rules={"2 joueurs"} goal={"aligner 4 pions"} image={P4Image}/>
                 <GameCard title={"Pendu"} rules={"1 joueur"} goal={"trouver le mot"} image={PenduImage}/>
                 <GameCard title={"Demineur"} rules={"1 joueur"} goal={"éviter les bombes"} image={BombImage}/>
+                <GameCard title={"Sudoku"} rules={"1 joueur"} goal={"remplir la grille"} image={SudokuImage}/>
                 <GameCard title={"Travle"} rules={"1 joueur"} goal={"relier les pays"} image={TravleImage}/>
             </body>
             <footer>

@@ -10,6 +10,8 @@ import PenduGamePage from './front/pages/jeux/pendu.tsx';
 import DemineurGamePage from './front/pages/jeux/demineur.tsx';
 import ParcoursPage from './front/pages/parcours.tsx';
 import TravleGamePage from './front/pages/jeux/travle.tsx';
+import SudokuGamePage from './front/pages/jeux/sudoku.tsx';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path="/Pendu" element={<PenduGamePage />} />
         <Route path="/Demineur" element={<DemineurGamePage />} />
         <Route path="/Travle" element={<TravleGamePage />} />
+        <Route path="/Sudoku" element={<SudokuGamePage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>

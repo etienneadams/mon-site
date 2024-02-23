@@ -48,13 +48,33 @@ const texts = () => {
                        'Le joueur continue de découvrir les cases et de marquer les mines jusqu\'à ce que toutes les cases libres soient révélées, remportant ainsi la partie.'];
     const demineurEndText = 'La partie se termine si un joueur découvre une case contenant une mine alors la partie est perdue ou si tous les espaces libres sont découverts sans déclencher de mine alors la partie est remportée.';
 
+    // Sudoku 
+    const sudokuGoalText = 'Le but du jeu Sudoku est de remplir une grille de 9x9 cases avec des chiffres de 1 à 9, de telle sorte que chaque ligne, chaque colonne et chaque région de 3x3 cases contienne tous les chiffres de 1 à 9 sans répétition.'
+    const sudokuHow = ['La grille est divisée en neuf régions de 3x3 cases, formant un total de 81 cases. Certaines cases sont déjà remplies avec des chiffres, ce sont les indices initiaux.',
+                        'Le joueur doit remplir les cases vides en plaçant un chiffre de 1 à 9 dans chacune d\'elles.',
+                        'Chaque chiffre doit apparaître une seule fois dans chaque ligne, chaque colonne et chaque région de 3x3 cases.',
+                        'Le joueur utilise des techniques de résolution telles que la recherche de candidats, l\'élimination, les paires et les triples pour déterminer où placer les chiffres manquants.',
+                        'Le Sudoku est un jeu de patience et de logique, et le joueur doit utiliser son raisonnement pour remplir la grille correctement.']
+    const sudokuEndText = 'Le jeu s\'arrête lorsque la grille est remplie correctement, chaque ligne, colonne et région contient tous les chiffres de 1 à 9 sans répétition.'
+                        
+
+    // Travle
+    const travleGoalText = 'Le but du jeu Travle est de relier deux pays en créant un chemin constitué des pays qui les relient. Le joueur devra utiliser leur connaissance géographique pour trouver la séquence de pays permettant de relier efficacement le point de départ au point d\'arrivée.';
+    const travleHow = ['Le joueur prend connaissance des pays qu\'il devra joindre.',
+                       'En utilisant ses connaissance des frontières et des relations géographiques entre les pays, le joueur doit identifier les pays qui connectent le point de départ au point d\'arrivée.',
+                       'Le joueur écrit le nom des pays pour former le chemin. Chaque pays doit être directement relié au pays précédent et au pays suivant dans la séquence.',
+                       'L\'objectif est donc de relier les deux pays initiaux en un nombre d\'essai maximum.'];
+    const travleEndText = 'Le jeu s\'arrête si le chemin est créé correctement (vitoire) ou si le nombre d\'essai maximum est atteint (défaite).';
+
 
     // light mode
 
     return {penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
             morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText,
             puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,
-            demineurGoalText, demineurHow, demineurEndText};
+            demineurGoalText, demineurHow, demineurEndText,
+            travleGoalText, travleHow, travleEndText, 
+            sudokuGoalText, sudokuHow, sudokuEndText};
 }
 
 export default texts;

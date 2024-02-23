@@ -21,9 +21,13 @@ const Colors = () => {
     const lightGrass = 'rgba(161, 219, 134, 1)';
     const turquoise = 'rgba(58, 129, 161, 1)';
 
+    // Sudoku
+    const veryLightGreen = 'rgba(157, 202, 174, 0.3)';
+
     return {mainGreen, lightGray, gray, lighterGray, royalBlue, disabledBlue,
             red, yellow, green, purple,
-            bombRed, lightGrass, turquoise};
+            bombRed, lightGrass, turquoise,
+            veryLightGreen};
 }
 
 export default Colors;

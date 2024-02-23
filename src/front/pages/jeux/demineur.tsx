@@ -163,7 +163,6 @@ const DemineurGamePage = () => {
     
 
     const renderTimer = () => {
-
         return (
             <p>: {formatTime(timer)}</p>
         );
@@ -229,7 +228,6 @@ const DemineurGamePage = () => {
     const dropdownItemsStyle: React.CSSProperties = {
         backgroundColor: colors.mainGreen,
         color: 'white',
-        
     };
 
     const timerDivStyle: React.CSSProperties = {

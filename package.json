@@ -2,7 +2,7 @@
   "name": "mon-site",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://etienneadams.github.io/mon-site",
+  "homepage": "https://etienneadams.github.io/mon-site/",
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",

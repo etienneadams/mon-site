@@ -113,6 +113,7 @@ const DemineurGamePage = () => {
         if (isGameWon) {
             setGameWon(true);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isClicked]);
 
     useEffect(() => {

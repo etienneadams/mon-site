@@ -9,8 +9,11 @@ import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import AutoFixHighRoundedIcon from '@mui/icons-material/AutoFixHighRounded';
 import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
 import LightbulbRoundedIcon from '@mui/icons-material/LightbulbRounded';
+import InMaintenancePage from "../inMaintenance.tsx";
 
 const SudokuGamePage = () => {
+    const inBuilding = false;
+    const inMaintenance = true;
     const texts = Texts();
     const index = 0;
     const [board, setBoard] = useState<number[]>(Array(9).fill(0));
@@ -171,52 +174,55 @@ const SudokuGamePage = () => {
             <header>
                 <GameNavbar drawerGoal={texts.sudokuGoalText} drawerHow={texts.sudokuHow} drawerEnd={texts.sudokuEndText} />
             </header>
-            <body style={bodyStyle}>
-                <div style={gameAreaStyle}>
-                    <div style={gameboardAreaStyle}>
-                        <div>
-                            <Button style={difficultyButtonStyle}> Facile </Button>
-                            <Button style={difficultyButtonStyle}> Moyenne </Button>
-                            <Button style={difficultyButtonStyle}> Difficile </Button>
-                            <Button style={difficultyButtonStyle}> Experte </Button>
-                            <Button style={difficultyButtonStyle}> Maître </Button>
-                        </div>
-                        <div style={gameboardStyle}>
-                            {renderBoard()}{renderBoard()} {renderBoard()} 
-                            {renderBoard()} {renderBoard()} {renderBoard()} 
-                            {renderBoard()} {renderBoard()} {renderBoard()}  
-                        </div>
-                    </div>
-                    <div style={answerAreaStyle}>
-                        <div style={actionButtonsStyle}>
-                            <IconButton component={ReplayRoundedIcon} sx={actionButtonIconsStyle}/>
-                            <IconButton component={AutoFixHighRoundedIcon} sx={actionButtonIconsStyle}/> 
-                            <IconButton component={DriveFileRenameOutlineRoundedIcon} sx={actionButtonIconsStyle}/> 
-                            <Badge badgeContent={numberOfHints} color="success" >
-                                <IconButton component={LightbulbRoundedIcon} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
-                            </Badge>
-                            <p style={actionTextsStyle}> Annuler </p> <p style={actionTextsStyle}> Effacer </p> <p style={actionTextsStyle}> Notes </p> <p style={actionTextsStyle}> Indices</p>
+            
+            { inMaintenance ? <InMaintenancePage />
+            : 
+                <>
+                    <body style={bodyStyle}>
+                        <div style={gameAreaStyle}>
+                            <div style={gameboardAreaStyle}>
+                                <div>
+                                    <Button style={difficultyButtonStyle}> Facile </Button>
+                                    <Button style={difficultyButtonStyle}> Moyenne </Button>
+                                    <Button style={difficultyButtonStyle}> Difficile </Button>
+                                    <Button style={difficultyButtonStyle}> Experte </Button>
+                                    <Button style={difficultyButtonStyle}> Maître </Button>
+                                </div>
+                                <div style={gameboardStyle}>
+                                    {renderBoard()}{renderBoard()} {renderBoard()} 
+                                    {renderBoard()} {renderBoard()} {renderBoard()} 
+                                    {renderBoard()} {renderBoard()} {renderBoard()}  
+                                </div>
+                            </div>
+                            <div style={answerAreaStyle}>
+                                <div style={actionButtonsStyle}>
+                                    <IconButton component={ReplayRoundedIcon} sx={actionButtonIconsStyle}/>
+                                    <IconButton component={AutoFixHighRoundedIcon} sx={actionButtonIconsStyle}/> 
+                                    <IconButton component={DriveFileRenameOutlineRoundedIcon} sx={actionButtonIconsStyle}/> 
+                                    <Badge badgeContent={numberOfHints} color="success" >
+                                        <IconButton component={LightbulbRoundedIcon} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
+                                    </Badge>
+                                    <p style={actionTextsStyle}> Annuler </p> <p style={actionTextsStyle}> Effacer </p> <p style={actionTextsStyle}> Notes </p> <p style={actionTextsStyle}> Indices</p>
 
+                                </div>
+                                <br />
+                                <div style={answerBoardStyle}>
+                                    {renderAnswerBoard()} 
+                                </div>
+                            </div>
                         </div>
-                        <br />
-                        <div style={answerBoardStyle}>
-                            {renderAnswerBoard()} 
+                        <div style={buttonDivStyle}>
+                            <Button style={buttonStyle} onClick={restart}> Rejouer </Button>
+                            <Link to="/jeux">
+                                <Button style={buttonStyle}> Quitter </Button>
+                            </Link>
                         </div>
-                    </div>
-                    <div>
-                        
-                    </div>
-                </div>
-                <div style={buttonDivStyle}>
-                    <Button style={buttonStyle} onClick={restart}> Rejouer </Button>
-                    <Link to="/jeux">
-                        <Button style={buttonStyle}> Quitter </Button>
-                    </Link>
-                </div>
-            </body>
-            <footer>
-                <Footer />
-            </footer>
+                    </body>
+                    <footer>
+                        <Footer />
+                    </footer>
+                </>
+            }
         </>
     )
 };

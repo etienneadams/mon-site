@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mon-site/static/css/main.5a9d7bb5.css",
-    "main.js": "/mon-site/static/js/main.de3a741f.js",
+    "main.js": "/mon-site/static/js/main.ca056ac4.js",
     "static/media/mountain_landscape.png": "/mon-site/static/media/mountain_landscape.edee9a1d0fbf9c49ca55.png",
     "static/media/Puissance 4.png": "/mon-site/static/media/Puissance 4.a8f0ac81effc24102b10.png",
     "static/media/etienne-adamczuk-logo.png": "/mon-site/static/media/etienne-adamczuk-logo.870d82a1ea0337278ff2.png",
@@ -9,10 +9,10 @@
     "static/media/Tic Tac Toe.png": "/mon-site/static/media/Tic Tac Toe.7b6cf3c372517f72c58e.png",
     "index.html": "/mon-site/index.html",
     "main.5a9d7bb5.css.map": "/mon-site/static/css/main.5a9d7bb5.css.map",
-    "main.de3a741f.js.map": "/mon-site/static/js/main.de3a741f.js.map"
+    "main.ca056ac4.js.map": "/mon-site/static/js/main.ca056ac4.js.map"
   },
   "entrypoints": [
     "static/css/main.5a9d7bb5.css",
-    "static/js/main.de3a741f.js"
+    "static/js/main.ca056ac4.js"
   ]
 }

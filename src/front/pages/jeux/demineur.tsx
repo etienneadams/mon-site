@@ -28,6 +28,8 @@ const DemineurGamePage = () => {
     const [gameLost, setGameLost] = useState<boolean>(false);
     const [gameStarted, setGameStarted] = useState(false);
     const [timer, setTimer] = useState(0);
+    const [isFlagMode, setIsFlagMode] = useState<boolean>(false);
+    const [numbOfFlags, setNumbOfFlags] = useState<number>(currentNumberOfBombs);
 
 
     const width = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
@@ -162,10 +164,18 @@ const DemineurGamePage = () => {
         ));
     };
     
-
     const renderTimer = () => {
         return (
-            <p>: {formatTime(timer)}</p>
+            <p> : {formatTime(timer)}</p>
+        );
+    };
+
+    const renderFlags = () => {
+        return (
+            <button style={{color: colors.mainGreen, backgroundColor: isFlagMode ? 'rgba(250, 130, 130, 0.4)' : 'transparent',
+            border: '1px solid', borderColor: colors.mainGreen, borderRadius: '5px'}} onClick={handleFlagClick}>
+                <GpsFixedIcon style={{fontSize: '20px', color: colors.bombRed, alignItems: 'center'}} /> <b style={{textAlign: 'center'}}>:  {numbOfFlags}</b>
+            </button>
         );
     };
 
@@ -173,19 +183,41 @@ const DemineurGamePage = () => {
         if (!gameStarted) {
             setGameStarted(true);
         }
-        if  (event.type === 'click') {
-            const updatedClickedArray = [...isClicked];
-            updatedClickedArray[index] = true;
-            setIsClicked(updatedClickedArray);
-            if (board[index] === 10) {
-                setGameLost(true);
+        if (event.type === 'click') {
+            if (isFlagMode) {
+                if (numbOfFlags > 0) {
+                    event.preventDefault();
+                    const updatedRightClickedArray = [...rightClicked];
+                    updatedRightClickedArray[index] = true;
+                    setRightClicked(updatedRightClickedArray);
+                    setNumbOfFlags(numbOfFlags - 1);
+                } else {
+                    event.preventDefault();
+                }
+            } else {
+                const updatedClickedArray = [...isClicked];
+                updatedClickedArray[index] = true;
+                setIsClicked(updatedClickedArray);
+                if (board[index] === 10) {
+                    setGameLost(true);
+                }
             }
         } else if (event.type === 'contextmenu') {
-            event.preventDefault();
-            const updatedRightClickedArray = [...rightClicked];
-            updatedRightClickedArray[index] = true;
-            setRightClicked(updatedRightClickedArray);
+            if (numbOfFlags > 0) {
+                event.preventDefault();
+                const updatedRightClickedArray = [...rightClicked];
+                updatedRightClickedArray[index] = true;
+                setRightClicked(updatedRightClickedArray);
+                setNumbOfFlags(numbOfFlags - 1);
+            } else {
+                event.preventDefault();
+            }
         }
+    };
+    
+
+    const handleFlagClick = () => {
+        setIsFlagMode(!isFlagMode);
     };
 
     const checkWin = () => {
@@ -203,6 +235,7 @@ const DemineurGamePage = () => {
     const restart = () => {
         initializeBoard();
         setGameWon(false);
+        setNumbOfFlags(currentNumberOfBombs);
     };
 
     // CSS
@@ -217,9 +250,17 @@ const DemineurGamePage = () => {
         flexDirection: 'column',
     };
 
+    const gameHeadStyle: React.CSSProperties = {
+        width: '500px',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3,1fr)',
+        textAlign: 'center',
+        justifyItems: 'center',
+    };
+
     const dropdownStyle: React.CSSProperties = {
-        position: 'sticky',
-        marginRight: '300px',
+        //position: 'sticky',
+        //marginRight: '300px',
         borderRadius: '10px',
         border: '1px solid',
         //marginBottom: '10px',
@@ -232,15 +273,27 @@ const DemineurGamePage = () => {
     };
 
     const timerDivStyle: React.CSSProperties = {
+        width: '100px',
         height: '50px',
         display: 'grid',
         gridTemplateColumns: 'repeat(2,1fr)',
         backgroundColor: colors.mainGreen,
         color: 'white',
-        justifyContent: 'center',
         alignContent: 'center',
         marginBottom: '10px',
         borderRadius: '10px',
+        paddingRight: '8px',
+    };
+
+    const flagAreaStyle: React.CSSProperties = {
+        //width: '20px',
+        //height: '50px',
+        //border: '1px solid',
+        //borderColor: colors.mainGreen,
+        //borderRadius: '5px',
+        //padding: '0px 8px',
+        justifyItems: 'center',
+        //display: 'flex',
     };
 
     const gameboardStyle: React.CSSProperties = {
@@ -274,17 +327,22 @@ const DemineurGamePage = () => {
                 <GameNavbar drawerGoal={texts.demineurGoalText} drawerHow={texts.demineurHow} drawerEnd={texts.demineurEndText} />
             </header>
             <body style={bodyStyle}>
-                <div>
-                    <Dropdown style={dropdownStyle} value={difficulties.indexOf(currentDifficulty)} onChange={(event) => handleDifficultyChange(event)} label={"Difficulté"} defaultValue={0}>
-                        <DropdownItem value={0}>Facile</DropdownItem>
-                        <DropdownItem value={1}>Moyen</DropdownItem>
-                        <DropdownItem value={2}>Difficile</DropdownItem>
-                        <DropdownItem value={3}>Expert</DropdownItem>
-                    </Dropdown>
-                </div>
-                <div style={timerDivStyle}>
-                    <IconButton component={TimerIcon} style={{fontSize: '40px', color: 'white', justifyContent: 'center', display: 'flex'}} />
-                    {renderTimer()}
+                <div style={gameHeadStyle}>
+                    <div>
+                        <Dropdown style={dropdownStyle} value={difficulties.indexOf(currentDifficulty)} onChange={(event) => handleDifficultyChange(event)} label={"Difficulté"} defaultValue={0}>
+                            <DropdownItem value={0}>Facile</DropdownItem>
+                            <DropdownItem value={1}>Moyen</DropdownItem>
+                            <DropdownItem value={2}>Difficile</DropdownItem>
+                            <DropdownItem value={3}>Expert</DropdownItem>
+                        </Dropdown>
+                    </div>
+                    <div style={timerDivStyle}>
+                        <IconButton component={TimerIcon} style={{fontSize: '50px', color: 'white'}} />
+                        {renderTimer()}
+                    </div>
+                    <div style={flagAreaStyle}>
+                        {renderFlags()}
+                    </div>
                 </div>
                 <div style={gameboardStyle}>
                     {renderBoard()}

@@ -11,9 +11,7 @@ import PlayCircleRoundedIcon from '@mui/icons-material/PlayCircleRounded';
 import { faBomb } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
-import { Dropdown, DropdownItem } from 'flowbite-react';
 import MenuComponent from "../../components/game/menuComponent.tsx";
-import { TransitEnterexitSharp } from "@mui/icons-material";
 import Icons from "../../components/game/icons.tsx";
 
 const DemineurGamePage = () => {
@@ -38,11 +36,21 @@ const DemineurGamePage = () => {
     const [numbOfFlags, setNumbOfFlags] = useState<number>(currentNumberOfBombs);
     const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
 
     const width = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
     const height = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
 
+    const calculateScreenSize = () => {
+        const winWidth = window.innerWidth;
+        const winHeight = window.innerHeight;
+        if (winWidth > winHeight) {
+            setIsMobile(false);
+        } else {
+            setIsMobile(true);
+        }
+    }
 
     const initializeBoard = () => {
         const newBoard = Array(currentDifficulty).fill(0);
@@ -63,6 +71,7 @@ const DemineurGamePage = () => {
         setIsFlagMode(false);
         setIsGamePaused(false);
         setIsMenuOpen(false);
+        calculateScreenSize();
         //setNumbOfFlags(numberOfBombsList[currentDifficulty]);
     };
 
@@ -93,18 +102,27 @@ const DemineurGamePage = () => {
 
     const bombAffectsAdjacentsCases = (board: number[]) => {
         for (let i = 0; i < currentDifficulty; i++) {
-            const x = i % rows;
-            const y = Math.floor(i / rows);            
+            const x = isMobile ? i % cols : i % rows;
+            const y = isMobile ? Math.floor(i / cols) : Math.floor(i / rows);            
             if (board[i] === 10) {
                 for (let xOffset = -1; xOffset <= 1; xOffset++) {
                     for (let yOffset = -1; yOffset <= 1; yOffset++) {
                         const adjX = x + xOffset;
                         const adjY = y + yOffset;
                         
-                        if (adjX >= 0 && adjX < rows && adjY >= 0 && adjY < cols) {
-                            const adjIndex = adjY * rows + adjX;
-                            if (board[adjIndex] !== 10) {
-                                board[adjIndex]++;
+                        if (isMobile) {
+                            if (adjX >= 0 && adjX < cols && adjY >= 0 && adjY < rows) {
+                                const adjIndex = adjY * cols + adjX;
+                                if (board[adjIndex] !== 10) {
+                                    board[adjIndex]++;
+                                }
+                            }
+                        } else {
+                            if (adjX >= 0 && adjX < rows && adjY >= 0 && adjY < cols) {
+                                const adjIndex = adjY * rows + adjX;
+                                if (board[adjIndex] !== 10) {
+                                    board[adjIndex]++;
+                                }
                             }
                         }
                     }
@@ -205,13 +223,17 @@ const DemineurGamePage = () => {
         }
         if (event.type === 'click') {
             if (isFlagMode) {
-                if (numbOfFlags > 0) {
-                    const updatedRightClickedArray = [...rightClicked];
-                    updatedRightClickedArray[index] = true;
-                    setRightClicked(updatedRightClickedArray);
-                    setNumbOfFlags(numbOfFlags - 1);
+                if (!rightClicked[index]) {
+                    if (numbOfFlags > 0) {
+                        const updatedRightClickedArray = [...rightClicked];
+                        updatedRightClickedArray[index] = true;
+                        setRightClicked(updatedRightClickedArray);
+                        setNumbOfFlags(numbOfFlags - 1);
+                    } else {
+                        event.preventDefault();
+                    }
                 } else {
-                    event.preventDefault();
+                    removeFlag(index);
                 }
             } else {
                 const updatedClickedArray = [...isClicked];
@@ -234,40 +256,16 @@ const DemineurGamePage = () => {
                     event.preventDefault();
                 }
             } else {
-                const updatedRightClickedArray = [...rightClicked];
-                updatedRightClickedArray[index] = false;
-                setRightClicked(updatedRightClickedArray);
-                setNumbOfFlags(numbOfFlags + 1);
-                
+                removeFlag(index);
             }
         }
-        removeFlag(index, event);
     };
 
-    const removeFlag = (index: number, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (!gameStarted) {
-            setGameStarted(true);
-        }
-        if (event.type === 'click') {
-            if (isFlagMode) {
-                if (board[index] === -1) {
-                    const updatedRightClickedArray = [...rightClicked];
-                    updatedRightClickedArray[index] = false;
-                    setRightClicked(updatedRightClickedArray);
-                    setNumbOfFlags(numbOfFlags + 1);
-                }
-            }
-        } else if (event.type === 'contextmenu') {
-            if (board[index] === -1) {
-                event.preventDefault();
-                const updatedRightClickedArray = [...rightClicked];
-                updatedRightClickedArray[index] = false;
-                setRightClicked(updatedRightClickedArray);
-                setNumbOfFlags(numbOfFlags + 1);
-            } else {
-                event.preventDefault();
-            }
-        }
+    const removeFlag = (index: number) => {
+        const updatedRightClickedArray = [...rightClicked];
+        updatedRightClickedArray[index] = false;
+        setRightClicked(updatedRightClickedArray);
+        setNumbOfFlags(numbOfFlags + 1);
     };
     
     const handleTimerClick = () => {
@@ -321,7 +319,7 @@ const DemineurGamePage = () => {
     };
 
     const timerDivStyle: React.CSSProperties = {
-        width: '100px',
+        width: '110px',
         height: '50px',
         display: 'grid',
         gridTemplateColumns: 'repeat(2,1fr)',
@@ -339,7 +337,7 @@ const DemineurGamePage = () => {
     
     const gameboardStyle: React.CSSProperties = {
         display: 'grid',
-        gridTemplateColumns: `repeat(${rows},${cols}fr)`,
+        gridTemplateColumns: isMobile ? `repeat(${cols},${rows}fr)` : `repeat(${rows},${cols}fr)`,
         gap: '2px',
         filter: isGamePaused ? 'blur(5px)' : 'none',
     };

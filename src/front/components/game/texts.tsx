@@ -47,6 +47,9 @@ const texts = () => {
                        'Le joueur peut marquer les cases qu\'il soupçonne de contenir une mine en plaçant un drapeau sur celles-ci. Cela permet d\'éviter de les découvrir accidentellement.',
                        'Le joueur continue de découvrir les cases et de marquer les mines jusqu\'à ce que toutes les cases libres soient révélées, remportant ainsi la partie.'];
     const demineurEndText = 'La partie se termine si un joueur découvre une case contenant une mine alors la partie est perdue ou si tous les espaces libres sont découverts sans déclencher de mine alors la partie est remportée.';
+    const demineurOptions = ['Facile',
+                            'Difficile',
+                            'Expert']
 
     // Sudoku 
     const sudokuGoalText = 'Le but du jeu Sudoku est de remplir une grille de 9x9 cases avec des chiffres de 1 à 9, de telle sorte que chaque ligne, chaque colonne et chaque région de 3x3 cases contienne tous les chiffres de 1 à 9 sans répétition.'
@@ -72,7 +75,7 @@ const texts = () => {
     return {penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
             morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText,
             puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,
-            demineurGoalText, demineurHow, demineurEndText,
+            demineurGoalText, demineurHow, demineurEndText, demineurOptions,
             travleGoalText, travleHow, travleEndText, 
             sudokuGoalText, sudokuHow, sudokuEndText};
 }

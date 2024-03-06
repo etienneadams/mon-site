@@ -193,7 +193,7 @@ const DemineurGamePage = () => {
                     value === 10 ? (
                         <FontAwesomeIcon icon={faBomb} style={bombStyle} />
                     ) : (
-                        <p style={{fontSize: '20px', textAlign: 'center', lineHeight: '10%'}}>{value}</p>
+                        <p style={{fontSize: '20px', textAlign: 'center', lineHeight: '10%'}}>{value > 0 ? value : ''}</p>
                     )
                 : 
                     <div style={{backgroundColor: 'grey'}} />

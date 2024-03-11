@@ -3,13 +3,15 @@ import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
 import Texts from "../../components/game/texts.tsx";
 import Colors from "../../colors/colors.tsx";
-import { Button, Card } from "@mui/material";
-import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import { Button, Card, Icon } from "@mui/material";
 import { Link } from "react-router-dom";
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
+import Icons from "../../components/game/icons.tsx";
 
 const MorpionGamePage = () => {
+    const icons = Icons()
+    const texts = Texts();
+
     const playerTurn = [1,2]
     const initialBoard = Array(9).fill(0);
     const [board, setBoard] = useState<number[]>(Array(9).fill(0));
@@ -17,12 +19,11 @@ const MorpionGamePage = () => {
     const [gameWon, setGameWon] = useState(false);
     const [winner, setWinner] = useState<number | null>(null);
 
-    const texts = Texts();
 
     const width = '10vw'
     const height = '10vw'
 
-    const form = (value: number) => value === 1 ? <ClearRoundedIcon sx={{width: '100%', height: '100%'}}/> : value === 2 ? <CircleOutlinedIcon sx={{width: '100%', height: '100%'}}/> : null;
+    const form = (value: number) => value === 1 ? <Icon component={icons.morpionCross} sx={{width: '100%', height: '100%'}}/> : value === 2 ? <Icon component={icons.morpionCircle} sx={{width: '100%', height: '100%'}}/> : null;
 
     const renderBoard = () => {
         return board.map((value, index) => (

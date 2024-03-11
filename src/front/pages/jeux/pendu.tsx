@@ -4,12 +4,13 @@ import GameNavbar from '../../components/navigation/gameNavbar.tsx';
 import Footer from '../../components/footer.tsx';
 import Colors from '../../colors/colors.tsx';
 import { Link } from 'react-router-dom';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import EndGameDialog from '../../components/game/endGameDialog.tsx';
 import Texts from '../../components/game/texts.tsx';
+import Icons from '../../components/game/icons.tsx';
 
 
 const PenduGamePage = () => {
+    const icons = Icons();
     const texts = Texts();
     
     const [word, setWord] = useState(() => {
@@ -113,7 +114,7 @@ const PenduGamePage = () => {
     const renderLifeIcons = () => {
     const lifeIcons: React.ReactNode[] = [];
     for (let i = 0; i < life; i++) {
-        lifeIcons.push(<Icon key={i} component={FavoriteIcon} style={{ color: 'pink' }} />);
+        lifeIcons.push(<Icon key={i} component={icons.penduLife} style={{ color: 'pink' }} />);
     }
     return lifeIcons;
     };

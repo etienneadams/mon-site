@@ -2,9 +2,8 @@ import { Box, Button, Card, CardContent, Divider, Icon, List, ListItem } from "@
 import React from "react";
 import { FunctionComponent } from "react";
 import Colors from "../../colors/colors.tsx";
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { Link } from "react-router-dom";
+import Icons from "./icons.tsx";
 
 type Props = {
     title: string;
@@ -14,6 +13,7 @@ type Props = {
 };
 
 const GameCard: FunctionComponent<Props> = (props: Props) => {
+    const icons = Icons()
 
     const greenFirstLetter = (name: string) => {
         let firstLetter = name.substring(0,1)
@@ -78,11 +78,11 @@ const GameCard: FunctionComponent<Props> = (props: Props) => {
                         <h4 style={rulesStyle}>Règles : </h4>
                         <List>
                             <ListItem style={{marginBottom: '-30px'}}>
-                                <Icon component={SportsEsportsIcon}/>
+                                <Icon component={icons.gameCardSports}/>
                                 <p style={{marginLeft: '10px', width: '200px'}}>{props.rules}</p>
                             </ListItem>
                             <ListItem style={{marginBottom: '-30px'}}>
-                                <Icon component={EmojiEventsIcon} />
+                                <Icon component={icons.gameCardEvent} />
                                 <p style={{marginLeft: '10px'}}>{props.goal}</p>
                             </ListItem>
                         </List>

@@ -3,8 +3,7 @@ import React from "react";
 import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import Colors from "../../colors/colors.tsx";
-import HouseRoundedIcon from '@mui/icons-material/HouseRounded';
-import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
+import Icons from "./icons.tsx";
 
 
 type Props = {
@@ -15,7 +14,7 @@ type Props = {
 };
 
 const EndGameDialog: FunctionComponent<Props> = (props: Props) => {
-
+    const icons = Icons()
     // CSS
     const colors = Colors();
 
@@ -40,9 +39,9 @@ const EndGameDialog: FunctionComponent<Props> = (props: Props) => {
                         </DialogContent>
                     )}
                     <DialogActions style={{display: 'flex', justifyContent: 'center'}}>
-                        <IconButton component={ReplayRoundedIcon} style={{fontSize: '50px', color: colors.mainGreen}} onClick={props.onClick}></IconButton>
+                        <IconButton component={icons.endGameDialogReplay} style={{fontSize: '50px', color: colors.mainGreen}} onClick={props.onClick}></IconButton>
                         <Link to="/jeux">
-                            <IconButton component={HouseRoundedIcon} style={{fontSize: '50px', color: colors.mainGreen}}></IconButton>
+                            <IconButton component={icons.endGameDialogHouse} style={{fontSize: '50px', color: colors.mainGreen}}></IconButton>
                         </Link>
                     </DialogActions>
                 </Dialog>

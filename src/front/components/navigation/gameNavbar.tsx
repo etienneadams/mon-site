@@ -3,9 +3,8 @@ import { FunctionComponent, useState } from "react";
 import logo from '../../assets/etienne-adamczuk-logo.png';
 import { Link, useLocation } from "react-router-dom";
 import Colors from "../../colors/colors.tsx";
-import InfoIcon from '@mui/icons-material/Info';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Drawer, Icon, IconButton, List, ListItem } from "@mui/material";
+import Icons from "../game/icons.tsx";
 
 type Props = {
     drawerGoal: string,
@@ -15,6 +14,7 @@ type Props = {
 };
 
 const GameNavbar: FunctionComponent<Props> = (props: Props) => {
+    const icons = Icons()
 
     const location = useLocation(); // Utilisation de useLocation pour accéder à l'URL
     const [ drawerOpened, setDrawerOpened ] = useState<boolean>(false);
@@ -68,7 +68,7 @@ const GameNavbar: FunctionComponent<Props> = (props: Props) => {
             <div style={titleStyle}>
                 {decodedGameTitle}
             </div>
-            <IconButton component={InfoIcon} color="success" onClick={() => setDrawerOpened(true)} style={{marginRight: '10px', fontSize: '40px'}}/>
+            <IconButton component={icons.gameNavbarInfo} color="success" onClick={() => setDrawerOpened(true)} style={{marginRight: '10px', fontSize: '40px'}}/>
             <Drawer style={drawerStyle} anchor="right" open={drawerOpened} onClose={() => setDrawerOpened(false)}> 
                 <div style={drawerStyle}>
                     <h2 style={{color: colors.mainGreen, justifyContent: 'center', display: 'flex'}}> Règles </h2>
@@ -83,7 +83,7 @@ const GameNavbar: FunctionComponent<Props> = (props: Props) => {
                     </List>
                     <h3 style={drawerSubtitleStyle}> Fin du jeu</h3>
                     <p>{props.drawerEnd}</p>
-                    <b style={{justifyContent: 'center', display: 'flex'}}> Bon jeu ! <Icon style={{paddingLeft: '10px', fontSize: '20px', color: colors.mainGreen}} component={ThumbUpIcon} /></b>
+                    <b style={{justifyContent: 'center', display: 'flex'}}> Bon jeu ! <Icon style={{paddingLeft: '10px', fontSize: '20px', color: colors.mainGreen}} component={icons.gameNavbarThumbUp} /></b>
                 </div>
             </Drawer>
         </div>

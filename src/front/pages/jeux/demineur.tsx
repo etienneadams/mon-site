@@ -3,12 +3,8 @@ import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
 import Texts from "../../components/game/texts.tsx";
 import Colors from "../../colors/colors.tsx";
-import { Button, Card, IconButton } from "@mui/material";
+import { Button, Card, Icon, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
-import TimerIcon from '@mui/icons-material/Timer';
-import GpsFixedIcon from '@mui/icons-material/GpsFixed';
-import PlayCircleRoundedIcon from '@mui/icons-material/PlayCircleRounded';
-import { faBomb } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
 import MenuComponent from "../../components/game/menuComponent.tsx";
@@ -172,7 +168,7 @@ const DemineurGamePage = () => {
               onClick={(event) => handleClick(index, event)} 
               onContextMenu={(event) => handleClick(index, event)}>
             {rightClicked[index] && value !== -1 ? (
-                <GpsFixedIcon style={{ fontSize: '20px' }} />
+                <Icon component={icons.demineurGpsFixed} style={{ fontSize: '20px' }} />
          
             ) : rightClicked[index] && value === -1 ? (
                 <Card key={index} 
@@ -191,7 +187,7 @@ const DemineurGamePage = () => {
             ) : (
                 isClicked[index] ? 
                     value === 10 ? (
-                        <FontAwesomeIcon icon={faBomb} style={bombStyle} />
+                        <FontAwesomeIcon icon={icons.demineurBomb} style={bombStyle} />
                     ) : (
                         <p style={{fontSize: '20px', textAlign: 'center', lineHeight: '10%'}}>{value > 0 ? value : ''}</p>
                     )
@@ -212,7 +208,7 @@ const DemineurGamePage = () => {
         return (
             <button style={{color: colors.mainGreen, backgroundColor: isFlagMode ? colors.lightRed : 'transparent',
             border: '1px solid', borderColor: colors.mainGreen, borderRadius: '5px'}} onClick={handleFlagClick}>
-                <GpsFixedIcon style={{fontSize: '20px', color: colors.bombRed, alignItems: 'center'}} /> <b style={{textAlign: 'center'}}>:  {numbOfFlags}</b>
+                <Icon component={icons.demineurGpsFixed} style={{fontSize: '20px', color: colors.bombRed, alignItems: 'center'}} /> <b style={{textAlign: 'center'}}>:  {numbOfFlags}</b>
             </button>
         );
     };
@@ -384,7 +380,7 @@ const DemineurGamePage = () => {
                         />
                     </div>
                     <div style={timerDivStyle}>
-                        <IconButton component={TimerIcon} style={{fontSize: '50px', color: 'white'}} onClick={handleTimerClick}/>
+                        <IconButton component={icons.demineurTimer} style={{fontSize: '50px', color: 'white'}} onClick={handleTimerClick}/>
                         {renderTimer()}
                     </div>
                     <div style={flagAreaStyle}>
@@ -407,7 +403,7 @@ const DemineurGamePage = () => {
                     <EndGameDialog title={'Dommage'} content={`Vous avez perdu`} onClick={restart} />
                 )}
                 {isGamePaused && (
-                    <IconButton component={PlayCircleRoundedIcon} style={playButtonStyle} onClick={resume}/>
+                    <IconButton component={icons.demineurPlayCircle} style={playButtonStyle} onClick={resume}/>
                 )}
             </body>
             <footer>

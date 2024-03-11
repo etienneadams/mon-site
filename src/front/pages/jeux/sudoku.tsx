@@ -5,16 +5,15 @@ import Texts from "../../components/game/texts.tsx";
 import { Badge, Button, Card, IconButton } from "@mui/material";
 import Colors from "../../colors/colors.tsx";
 import { Link } from "react-router-dom";
-import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
-import AutoFixHighRoundedIcon from '@mui/icons-material/AutoFixHighRounded';
-import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
-import LightbulbRoundedIcon from '@mui/icons-material/LightbulbRounded';
 import InMaintenancePage from "../inMaintenance.tsx";
+import Icons from "../../components/game/icons.tsx";
 
 const SudokuGamePage = () => {
+    const texts = Texts();
+    const icons = Icons();
+
     const inBuilding = false;
     const inMaintenance = true;
-    const texts = Texts();
     const index = 0;
     const [board, setBoard] = useState<number[]>(Array(9).fill(0));
     const [currentDifficulty, setCurrentDifficulty] = useState<number>(index);
@@ -196,11 +195,11 @@ const SudokuGamePage = () => {
                             </div>
                             <div style={answerAreaStyle}>
                                 <div style={actionButtonsStyle}>
-                                    <IconButton component={ReplayRoundedIcon} sx={actionButtonIconsStyle}/>
-                                    <IconButton component={AutoFixHighRoundedIcon} sx={actionButtonIconsStyle}/> 
-                                    <IconButton component={DriveFileRenameOutlineRoundedIcon} sx={actionButtonIconsStyle}/> 
+                                    <IconButton component={icons.sudokuReplay} sx={actionButtonIconsStyle}/>
+                                    <IconButton component={icons.sudokuEdit} sx={actionButtonIconsStyle}/> 
+                                    <IconButton component={icons.sudokuComment} sx={actionButtonIconsStyle}/> 
                                     <Badge badgeContent={numberOfHints} color="success" >
-                                        <IconButton component={LightbulbRoundedIcon} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
+                                        <IconButton component={icons.sudokuHint} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
                                     </Badge>
                                     <p style={actionTextsStyle}> Annuler </p> <p style={actionTextsStyle}> Effacer </p> <p style={actionTextsStyle}> Notes </p> <p style={actionTextsStyle}> Indices</p>
 

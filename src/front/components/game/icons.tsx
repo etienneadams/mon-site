@@ -1,6 +1,6 @@
 import { 
     faChevronDown, faChevronRight, faEgg, 
-    faPerson, faHatWizard
+    faPerson, faHatWizard, faBrain, faBaby
 } from "@fortawesome/free-solid-svg-icons";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -71,6 +71,7 @@ const Icons = () => {
     const sudokuEdit = AutoFixHighRoundedIcon;
     const sudokuComment = DriveFileRenameOutlineRoundedIcon;
     const sudokuHint = LightbulbRoundedIcon;
+    const sudokuMenuOptions = [faEgg, faBaby, faPerson, faHatWizard, faBrain]
 
 
     return {contactGithub, contactLinkedIn, contactMail, contactTwitch, contactYouTube,
@@ -81,7 +82,7 @@ const Icons = () => {
         morpionCircle, morpionCross,
         penduLife,
         puissance4Circle,
-        sudokuReplay, sudokuEdit, sudokuComment, sudokuHint}
+        sudokuReplay, sudokuEdit, sudokuComment, sudokuHint, sudokuMenuOptions}
 };
 
 export default Icons;

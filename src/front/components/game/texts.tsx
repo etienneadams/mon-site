@@ -59,7 +59,11 @@ const texts = () => {
                         'Le joueur utilise des techniques de résolution telles que la recherche de candidats, l\'élimination, les paires et les triples pour déterminer où placer les chiffres manquants.',
                         'Le Sudoku est un jeu de patience et de logique, et le joueur doit utiliser son raisonnement pour remplir la grille correctement.']
     const sudokuEndText = 'Le jeu s\'arrête lorsque la grille est remplie correctement, chaque ligne, colonne et région contient tous les chiffres de 1 à 9 sans répétition.'
-                        
+    const sudokuOptions = ['Facile',
+                            'Moyen',
+                            'Difficile',
+                            'Expert',
+                            'Maître']
 
     // Travle
     const travleGoalText = 'Le but du jeu Travle est de relier deux pays en créant un chemin constitué des pays qui les relient. Le joueur devra utiliser leur connaissance géographique pour trouver la séquence de pays permettant de relier efficacement le point de départ au point d\'arrivée.';
@@ -77,7 +81,7 @@ const texts = () => {
             puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,
             demineurGoalText, demineurHow, demineurEndText, demineurOptions,
             travleGoalText, travleHow, travleEndText, 
-            sudokuGoalText, sudokuHow, sudokuEndText};
+            sudokuGoalText, sudokuHow, sudokuEndText, sudokuOptions};
 }
 
 export default texts;

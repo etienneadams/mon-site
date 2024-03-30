@@ -3,13 +3,12 @@ import Navbar from "../components/navigation/navbar.tsx";
 import Footer from "../components/footer.tsx";
 import Colors from "../colors/colors.tsx";
 import { Alert, Box, Button, Card, CardContent, CardHeader, Dialog, DialogContent, DialogTitle, Divider, FormControl, FormControlLabel, FormLabel, Icon, Radio, RadioGroup, TextField } from "@mui/material";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import MailIcon from '@mui/icons-material/Mail';
 import { Link } from "react-router-dom";
+import Icons from "../components/game/icons.tsx";
 
 const ContactPage = () => {
+    const icons = Icons()
+
     const [open, setOpen] = useState(false);
     const [mailValue] = useState<string>();
 
@@ -74,33 +73,33 @@ const ContactPage = () => {
                     <Card variant='outlined' style={cardStyle}>
                         <CardHeader style={cardHeaderStyle} title={'Me Contacter'}/>
                         <CardContent style={contactLinkStyle}>
-                            <Icon component={GitHubIcon}/>
+                            <Icon component={icons.contactGithub}/>
                             <Link to={"https://github.com/etienneadams"} target="_blank">
                                 <Button style={{color: colors.mainGreen}} >Github</Button>
                             </Link>
                         </CardContent>
                         <Divider />
                         <CardContent style={contactLinkStyle}>
-                            <Icon component={LinkedInIcon}/>
+                            <Icon component={icons.contactLinkedIn}/>
                             <Link to={"https://fr.linkedin.com/in/etienne-adamczuk"} target="_blank">
                                 <Button style={{color: colors.mainGreen}}>LinkedIn</Button>
                             </Link>
                         </CardContent>
                         <Divider/>
                         <CardContent style={contactLinkStyle}>
-                            <Icon component={MailIcon}/>
+                            <Icon component={icons.contactMail}/>
                             <Button style={{color: colors.mainGreen}} onClick={handleOpen}>Mail</Button>
                         </CardContent>
                         <Divider />
                         <CardContent style={contactLinkStyle}>
-                            <Icon component={YouTubeIcon}/>
+                            <Icon component={icons.contactYouTube}/>
                             <Link to={"https://m.twitch.tv/mrxsoisson/home"} target="_blank">
                                 <Button style={{color: colors.mainGreen}}>Twitch</Button>
                             </Link>
                         </CardContent>
                         <Divider />
                         <CardContent style={contactLinkStyle}>
-                            <Icon component={YouTubeIcon}/>
+                            <Icon component={icons.contactYouTube}/>
                             <Link to={"https://youtube.com/@MrSoisson-adams?si=A2m2mv-O2uodqQMs"} target="_blank">
                                 <Button style={{color: colors.mainGreen}}>Youtube</Button>
                             </Link>

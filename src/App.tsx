@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="*" element={<Navigate to="/accueil" />} />
+        <Route path="*" element={<Navigate to="/mon-site" />} />
         <Route path="/accueil" element={<HomePage />} />
         <Route path="/parcours" element={<ParcoursPage />} />
         <Route path="/jeux" element={<GamePage />} />

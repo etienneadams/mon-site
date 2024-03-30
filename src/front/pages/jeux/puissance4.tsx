@@ -3,14 +3,17 @@ import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
 import Texts from "../../components/game/texts.tsx";
 import Colors from "../../colors/colors.tsx";
-import { Button, Card } from "@mui/material";
+import { Button, Card, Icon } from "@mui/material";
 import { Link } from "react-router-dom";
-import CircleIcon from '@mui/icons-material/Circle';
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
+import Icons from "../../components/game/icons.tsx";
 
 
 const Puissance4GamePage = () => {
+    const icons = Icons();
+    const texts = Texts();
     const colors = Colors();
+
     const playerTurn = [1,2]
     const initialBoard = Array(42).fill(0);
     const [board, setBoard] = useState<number[]>(Array(42).fill(0));
@@ -24,9 +27,9 @@ const Puissance4GamePage = () => {
     const formColorP1 = colors.red
     const formColorP2 = colors.yellow
 
-    const texts = Texts();
 
-    const form = (value: number) => value === 1 ? <CircleIcon sx={{width: '100%', height: '100%', color: formColorP1}}/> : value === 2 ? <CircleIcon sx={{width: '100%', height: '100%', color: formColorP2}}/> : null;
+    const form = (value: number) => value === 1 ? <Icon component={icons.puissance4Circle} sx={{width: '100%', height: '100%', color: formColorP1}}/> 
+            : value === 2 ? <Icon component={icons.puissance4Circle} sx={{width: '100%', height: '100%', color: formColorP2}}/> : null;
 
     const renderBoard = () => {
         return board.map((value, index) => (
@@ -134,7 +137,6 @@ const Puissance4GamePage = () => {
     };
 
     // CSS
-    
 
     const bodyStyle: React.CSSProperties = {
         backgroundColor: colors.lighterGray,

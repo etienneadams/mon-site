@@ -59,7 +59,111 @@ const texts = () => {
                         'Le joueur utilise des techniques de résolution telles que la recherche de candidats, l\'élimination, les paires et les triples pour déterminer où placer les chiffres manquants.',
                         'Le Sudoku est un jeu de patience et de logique, et le joueur doit utiliser son raisonnement pour remplir la grille correctement.']
     const sudokuEndText = 'Le jeu s\'arrête lorsque la grille est remplie correctement, chaque ligne, colonne et région contient tous les chiffres de 1 à 9 sans répétition.'
-                        
+    const sudokuOptions = ['Facile',
+                            'Moyen',
+                            'Difficile',
+                            'Expert',
+                            'Maître']
+    const sudokuEasyGrid1 = [[5,0,0,3,1,7,9,2,0],
+                            [0,0,7,0,0,0,1,0,5],
+                            [0,0,0,8,5,6,0,0,0],
+                            [0,2,0,0,7,0,0,0,8],
+                            [0,0,8,5,9,0,2,0,0],
+                            [0,9,0,2,3,0,6,0,7],
+                            [2,0,0,4,6,0,0,0,1],
+                            [8,4,0,1,2,0,0,0,0],
+                            [0,5,0,7,0,9,0,4,0]]
+
+    const sudokuEasyGrid1Solved = [[5,8,4,3,1,7,9,2,6],
+                                  [6,3,7,9,4,2,1,8,5],
+                                  [9,1,2,8,5,6,4,7,3],
+                                  [3,2,1,6,7,4,5,9,8],
+                                  [7,6,8,5,9,1,2,3,4],
+                                  [4,9,5,2,3,8,6,1,7],
+                                  [2,7,9,4,6,3,8,5,1],
+                                  [8,4,3,1,2,5,7,6,9],
+                                  [1,5,6,7,8,9,3,4,2]]
+    
+    const sudokuEasyGrid1Test = [[5,8,4,3,1,7,9,2,6],
+                                [6,3,7,9,4,2,1,8,5],
+                                [9,1,2,8,5,6,4,7,3],
+                                [3,2,1,6,7,4,5,9,8],
+                                [7,6,8,5,9,1,2,3,4],
+                                [4,9,5,2,3,8,6,1,7],
+                                [2,7,9,4,6,3,8,5,1],
+                                [8,4,3,1,2,5,7,6,9],
+                                [1,5,6,7,8,9,3,4,0]] // 2
+
+    const sudokuMediumGrid1 = [[3,2,0,7,0,0,0,9,0],
+                              [8,0,0,4,0,0,2,0,0],
+                              [0,4,0,2,9,3,8,0,0],
+                              [0,0,2,3,0,0,1,0,0],
+                              [0,8,4,9,0,0,0,2,6],
+                              [0,6,0,5,0,0,9,7,0],
+                              [2,0,8,0,0,0,5,0,9],
+                              [0,0,0,0,0,5,0,0,0],
+                              [0,0,7,0,0,9,0,3,0]]
+
+    const sudokuMediumGrid1Solved = [[3,2,5,7,6,8,4,9,1],
+                                    [8,7,9,4,5,1,2,6,3],
+                                    [6,4,1,2,9,3,8,5,7],
+                                    [7,9,2,3,4,6,1,8,5],
+                                    [5,8,4,9,1,7,3,2,6],
+                                    [1,6,3,5,8,2,9,7,4],
+                                    [2,3,8,6,7,4,5,1,9],
+                                    [9,1,6,8,3,5,7,4,2],
+                                    [4,5,7,1,2,9,6,3,8]]
+
+    const sudokuHardGrid1 = [[6,8,3,1,0,0,0,0,0],
+                            [0,0,0,0,0,5,7,1,0],
+                            [0,0,0,0,0,0,0,0,0],
+                            [5,0,9,0,0,4,2,0,0],
+                            [0,0,0,8,0,0,0,0,0],
+                            [0,4,0,0,0,0,0,9,0],
+                            [1,3,0,2,0,6,4,0,0],
+                            [0,6,0,0,0,0,0,0,9],
+                            [0,0,0,0,0,0,0,2,3]]
+
+    const sudokuExpertGrid1 = [[0,0,5,8,0,0,0,0,0],
+                              [2,0,0,0,0,0,0,0,0],
+                              [0,0,0,0,0,6,7,4,3],
+                              [7,0,9,0,0,0,8,0,0],
+                              [0,0,0,0,0,0,0,7,4],
+                              [0,0,0,0,0,4,1,0,9],
+                              [0,6,0,0,0,0,0,0,0],
+                              [1,0,0,0,2,7,6,5,0],
+                              [5,0,0,0,0,3,0,0,0]]
+
+    const sudokuExpertGrid1Solved = [[0,0,5,8,0,0,0,0,0],
+                                    [2,0,0,0,0,0,0,0,0],
+                                    [0,0,0,0,0,6,7,4,3],
+                                    [7,0,9,0,0,0,8,0,0],
+                                    [0,0,0,0,0,0,0,7,4],
+                                    [0,0,0,0,0,4,1,0,9],
+                                    [0,6,0,0,0,0,0,0,0],
+                                    [1,0,0,0,2,7,6,5,0],
+                                    [5,0,0,0,0,3,0,0,0]]
+
+    const sudokuMasterGrid1 = [[0,0,4,0,0,0,0,8,0],
+                                [2,0,0,7,0,0,0,0,0],
+                                [0,6,0,0,0,8,0,0,9],
+                                [0,0,5,4,0,0,0,0,0],
+                                [1,0,0,0,0,5,0,0,2],
+                                [0,0,0,0,0,0,0,9,0],
+                                [0,0,6,0,0,9,3,0,5],
+                                [8,3,0,0,1,0,0,0,0],
+                                [0,0,1,0,0,2,0,0,6]]
+
+    const sudokuEasyGrids = [sudokuEasyGrid1]
+    const sudokuEasySolvedGrids = [sudokuEasyGrid1Solved]
+    const sudokuMediumGrids= [sudokuMediumGrid1]
+    const sudokuMediumSolvedGrids = [sudokuMediumGrid1Solved]
+    const sudokuHardGrids = [sudokuHardGrid1]
+    const sudokuHardSolvedGrids = []
+    const sudokuExpertGrids = [sudokuExpertGrid1]
+    const sudokuExpertSolvedGrids = []
+    const sudokuMasterGrids = [sudokuMasterGrid1]
+    const sudokuMasterSolvedGrids = []
 
     // Travle
     const travleGoalText = 'Le but du jeu Travle est de relier deux pays en créant un chemin constitué des pays qui les relient. Le joueur devra utiliser leur connaissance géographique pour trouver la séquence de pays permettant de relier efficacement le point de départ au point d\'arrivée.';
@@ -77,7 +181,8 @@ const texts = () => {
             puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,
             demineurGoalText, demineurHow, demineurEndText, demineurOptions,
             travleGoalText, travleHow, travleEndText, 
-            sudokuGoalText, sudokuHow, sudokuEndText};
+            sudokuGoalText, sudokuHow, sudokuEndText, sudokuOptions, 
+            sudokuEasyGrids, sudokuEasySolvedGrids, sudokuEasyGrid1Test, sudokuMediumGrids, sudokuMediumSolvedGrids, sudokuHardGrids, sudokuExpertGrids, sudokuMasterGrids};
 }
 
 export default texts;

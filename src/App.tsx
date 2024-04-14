@@ -11,13 +11,13 @@ import DemineurGamePage from './front/pages/jeux/demineur.tsx';
 import ParcoursPage from './front/pages/parcours.tsx';
 import TravleGamePage from './front/pages/jeux/travle.tsx';
 import SudokuGamePage from './front/pages/jeux/sudoku.tsx';
+import EchecGamePage from './front/pages/jeux/echec.tsx';
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="*" element={<Navigate to="/mon-site" />} />
         <Route path="/accueil" element={<HomePage />} />
         <Route path="/parcours" element={<ParcoursPage />} />
         <Route path="/jeux" element={<GamePage />} />
@@ -27,6 +27,7 @@ function App() {
         <Route path="/Demineur" element={<DemineurGamePage />} />
         <Route path="/Travle" element={<TravleGamePage />} />
         <Route path="/Sudoku" element={<SudokuGamePage />} />
+        <Route path="/Echec" element={<EchecGamePage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>

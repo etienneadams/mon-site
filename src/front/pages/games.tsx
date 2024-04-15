@@ -9,6 +9,7 @@ import PenduImage from "../assets/Pendu.png";
 import BombImage from "../assets/minesweeper.jpg";
 import TravleImage from "../assets/travle.png";
 import SudokuImage from "../assets/sudoku.png";
+import ChessImage from "../assets/echec.png";
 
 
 const GamePage = () => {
@@ -37,7 +38,7 @@ const GamePage = () => {
                 <GameCard title={"Demineur"} rules={"1 joueur"} goal={"éviter les bombes"} image={BombImage}/>
                 <GameCard title={"Sudoku"} rules={"1 joueur"} goal={"remplir la grille"} image={SudokuImage}/>
                 <GameCard title={"Travle"} rules={"1 joueur"} goal={"relier les pays"} image={TravleImage}/>
-                <GameCard title={"Echec"} rules={"1 joueur"} goal={"mettre le roi adverse en echec"} image={""} />
+                <GameCard title={"Echec"} rules={"2 joueurs"} goal={"mettre le roi adverse en echec"} image={ChessImage} />
             </body>
             <footer>
                 <Footer/>

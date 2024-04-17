@@ -8,8 +8,11 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import { Link } from "react-router-dom";
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
+import { useMobile } from "../../components/contexts/mobileContext.tsx";
 
 const MorpionGamePage = () => {
+    const { isMobile } = useMobile()
+
     const playerTurn = [1,2]
     const initialBoard = Array(9).fill(0);
     const [board, setBoard] = useState<number[]>(Array(9).fill(0));
@@ -19,8 +22,8 @@ const MorpionGamePage = () => {
 
     const texts = Texts();
 
-    const width = '10vw'
-    const height = '10vw'
+    const width = `${window.innerWidth - 10} vw`
+    const height = `${window.innerWidth - 10} vw`
 
     const form = (value: number) => value === 1 ? <ClearRoundedIcon sx={{width: '100%', height: '100%'}}/> : value === 2 ? <CircleOutlinedIcon sx={{width: '100%', height: '100%'}}/> : null;
 
@@ -101,12 +104,14 @@ const MorpionGamePage = () => {
     };
 
     const gameboardStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : 'auto',
         display: 'grid',
         gridTemplateColumns: 'repeat(3,3fr)',
         gap: '5px',
     };
 
     const buttonDivStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : 'auto',
         justifyContent: 'center',
         display: 'flex',
         marginTop: '20px',

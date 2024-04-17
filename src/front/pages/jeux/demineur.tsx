@@ -9,10 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
 import MenuComponent from "../../components/game/menuComponent.tsx";
 import Icons from "../../components/game/icons.tsx";
-import { MobileProvider, useMobile } from "../../components/contexts/mobileContext.tsx";
+import { useMobile } from "../../components/contexts/mobileContext.tsx";
 
 const DemineurGamePage = () => {
     const { isMobile } = useMobile();
+
     const texts = Texts();
     const icons = Icons();
 
@@ -39,15 +40,6 @@ const DemineurGamePage = () => {
     const width = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
     const height = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
 
-    /* const calculateScreenSize = () => {
-        const winWidth = window.innerWidth;
-        const winHeight = window.innerHeight;
-        if (winWidth > winHeight) {
-            setIsMobile(false);
-        } else {
-            setIsMobile(true);
-        }
-    } */
 
     const initializeBoard = () => {
         const newBoard = Array(currentDifficulty).fill(0);
@@ -68,7 +60,6 @@ const DemineurGamePage = () => {
         setIsFlagMode(false);
         setIsGamePaused(false);
         setIsMenuOpen(false);
-        // calculateScreenSize();
         //setNumbOfFlags(numberOfBombsList[currentDifficulty]);
     };
 
@@ -308,7 +299,7 @@ const DemineurGamePage = () => {
     };
 
     const gameHeadStyle: React.CSSProperties = {
-        width: '500px',
+        width: isMobile ? '90vw' : 'auto',
         display: 'grid',
         gridTemplateColumns: 'repeat(3,1fr)',
         textAlign: 'center',
@@ -333,6 +324,7 @@ const DemineurGamePage = () => {
     };
     
     const gameboardStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : 'auto',
         display: 'grid',
         gridTemplateColumns: isMobile ? `repeat(${cols},${rows}fr)` : `repeat(${rows},${cols}fr)`,
         gap: '2px',
@@ -346,6 +338,7 @@ const DemineurGamePage = () => {
     };
 
     const buttonDivStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : 'auto',
         justifyContent: 'center',
         display: 'flex',
         marginTop: '10px',

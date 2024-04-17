@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
 import Texts from "../../components/game/texts.tsx";
@@ -9,8 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EndGameDialog from "../../components/game/endGameDialog.tsx";
 import MenuComponent from "../../components/game/menuComponent.tsx";
 import Icons from "../../components/game/icons.tsx";
+import { MobileProvider, useMobile } from "../../components/contexts/mobileContext.tsx";
 
 const DemineurGamePage = () => {
+    const { isMobile } = useMobile();
     const texts = Texts();
     const icons = Icons();
 
@@ -32,13 +34,12 @@ const DemineurGamePage = () => {
     const [numbOfFlags, setNumbOfFlags] = useState<number>(currentNumberOfBombs);
     const [isGamePaused, setIsGamePaused] = useState<boolean>(false);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    const [isMobile, setIsMobile] = useState<boolean>(false);
 
 
     const width = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
     const height = currentDifficulty === difficulties[0] ? '40px' : currentDifficulty === difficulties[1] ? '30px' : '20px';
 
-    const calculateScreenSize = () => {
+    /* const calculateScreenSize = () => {
         const winWidth = window.innerWidth;
         const winHeight = window.innerHeight;
         if (winWidth > winHeight) {
@@ -46,7 +47,7 @@ const DemineurGamePage = () => {
         } else {
             setIsMobile(true);
         }
-    }
+    } */
 
     const initializeBoard = () => {
         const newBoard = Array(currentDifficulty).fill(0);
@@ -67,7 +68,7 @@ const DemineurGamePage = () => {
         setIsFlagMode(false);
         setIsGamePaused(false);
         setIsMenuOpen(false);
-        calculateScreenSize();
+        // calculateScreenSize();
         //setNumbOfFlags(numberOfBombsList[currentDifficulty]);
     };
 

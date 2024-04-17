@@ -9,8 +9,11 @@ import InMaintenancePage from "../inMaintenance.tsx"
 import Icons from "../../components/game/icons.tsx" 
 import MenuComponent from "../../components/game/menuComponent.tsx" 
 import EndGameDialog from "../../components/game/endGameDialog.tsx" 
+import { useMobile } from "../../components/contexts/mobileContext.tsx"
 
 const SudokuGamePage = () => {
+    const { isMobile } = useMobile();
+
     const texts = Texts() 
     const icons = Icons() 
 
@@ -289,7 +292,8 @@ const SudokuGamePage = () => {
     } 
 
     const gameAreaStyle: React.CSSProperties = {
-        display: 'flex',
+        display: isMobile ? 'grid' : 'flex',
+        //display: 'flex',
     } 
 
     const gameboardAreaStyle: React.CSSProperties = {
@@ -331,19 +335,24 @@ const SudokuGamePage = () => {
     
 
     const answerAreaStyle: React.CSSProperties = {
-        marginLeft: '30px',
+        marginLeft: isMobile ? '' : '30px',
+        marginTop: isMobile ? '20px' : '',
     } 
 
     const actionButtonsStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : '',
+        justifyItems: 'center',
         display: 'grid',
         gridTemplateColumns: 'repeat(4,2fr)',
-        gap: '4px',
+        gap: '1px',
     } 
 
     const actionButtonIconsStyle: React.CSSProperties = {
-        fontSize: '50px', 
+        fontSize: isMobile ? '5vh' : '50px', 
         backgroundColor: colors.veryLightGreen, 
         color: colors.mainGreen,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4,1fr)',
     } 
 
     const actionTextsStyle: React.CSSProperties = {
@@ -353,17 +362,19 @@ const SudokuGamePage = () => {
     } 
 
     const answerBoardStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : '',
+        justifyContent: 'center',
         display: 'grid',
-        gridTemplateColumns: 'repeat(3,3fr)',
+        gridTemplateColumns: isMobile ? 'repeat(9,1fr)' : 'repeat(3,3fr)',
         gap: '3px',
     } 
 
     const answerStyle = (index: number): React.CSSProperties => {
         return {
-            width : "60px",
-            height : "60px",
+            width : isMobile ? '40px' : "60px",
+            height : isMobile ? '40px' : "60px",
             margin: 'auto', 
-            fontSize: "35px", 
+            fontSize: isMobile ? '23px' : "35px", 
             fontFamily: "helvetica", 
             color: colors.mainGreen, 
             //background: isHover[index] ? colors.bombRed : colors.veryLightGreen, 
@@ -375,6 +386,7 @@ const SudokuGamePage = () => {
     } 
 
     const buttonDivStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : 'auto',
         justifyContent: 'center',
         display: 'flex',
         marginTop: '20px',
@@ -397,33 +409,67 @@ const SudokuGamePage = () => {
             : 
                 <>
                     <body style={bodyStyle}>
-                        <div style={gameAreaStyle}>
-                            <div style={gameboardAreaStyle}>
-                                <div>
-                                    <MenuComponent buttonTitle={"Difficulté"} optionTitles={texts.sudokuOptions} onClick={(event) => handleDifficultyChange(event)} pictures={icons.sudokuMenuOptions} />
+                        { isMobile ? 
+                        <>
+                            <div style={gameAreaStyle}>
+                                <div style={gameboardAreaStyle}>
+                                    <div>
+                                        <MenuComponent buttonTitle={"Difficulté"} optionTitles={texts.sudokuOptions} onClick={(event) => handleDifficultyChange(event)} pictures={icons.sudokuMenuOptions} />
+                                    </div>
+                                    <div style={gameboardStyle}>
+                                        {renderBoard()} 
+                                    </div>
                                 </div>
-                                <div style={gameboardStyle}>
-                                    {renderBoard()} 
+                                <div style={answerAreaStyle}>
+                                    <div style={actionButtonsStyle}>
+                                        <IconButton component={icons.sudokuReplay} sx={actionButtonIconsStyle}/>
+                                        <IconButton component={icons.sudokuEdit} sx={actionButtonIconsStyle} onClick={handleRemoveClick}/> 
+                                        <Badge badgeContent={isCommentMode ? 'ON' : 'OFF'} color="success" >
+                                            <IconButton component={icons.sudokuComment} sx={actionButtonIconsStyle} onClick={handleCommentClick}/> 
+                                        </Badge>
+                                        <Badge badgeContent={numberOfHints} color="success" >
+                                            <IconButton component={icons.sudokuHint} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
+                                        </Badge>
+                                        <p style={actionTextsStyle}> Annuler </p> <p style={actionTextsStyle}> Effacer </p> <p style={actionTextsStyle}> Notes </p> <p style={actionTextsStyle}> Indices</p>
+                                    </div>
+                                    <br />
+                                    <div style={answerBoardStyle}>
+                                        {renderAnswerBoard()} 
+                                    </div>
                                 </div>
                             </div>
-                            <div style={answerAreaStyle}>
-                                <div style={actionButtonsStyle}>
-                                    <IconButton component={icons.sudokuReplay} sx={actionButtonIconsStyle}/>
-                                    <IconButton component={icons.sudokuEdit} sx={actionButtonIconsStyle} onClick={handleRemoveClick}/> 
-                                    <Badge badgeContent={isCommentMode ? 'ON' : 'OFF'} color="success" >
-                                        <IconButton component={icons.sudokuComment} sx={actionButtonIconsStyle} onClick={handleCommentClick}/> 
-                                    </Badge>
-                                    <Badge badgeContent={numberOfHints} color="success" >
-                                        <IconButton component={icons.sudokuHint} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
-                                    </Badge>
-                                    <p style={actionTextsStyle}> Annuler </p> <p style={actionTextsStyle}> Effacer </p> <p style={actionTextsStyle}> Notes </p> <p style={actionTextsStyle}> Indices</p>
+                        </>
+                        :
+                        <>
+                            <div style={gameAreaStyle}>
+                                <div style={gameboardAreaStyle}>
+                                    <div>
+                                        <MenuComponent buttonTitle={"Difficulté"} optionTitles={texts.sudokuOptions} onClick={(event) => handleDifficultyChange(event)} pictures={icons.sudokuMenuOptions} />
+                                    </div>
+                                    <div style={gameboardStyle}>
+                                        {renderBoard()} 
+                                    </div>
                                 </div>
-                                <br />
-                                <div style={answerBoardStyle}>
-                                    {renderAnswerBoard()} 
+                                <div style={answerAreaStyle}>
+                                    <div style={actionButtonsStyle}>
+                                        <IconButton component={icons.sudokuReplay} sx={actionButtonIconsStyle}/>
+                                        <IconButton component={icons.sudokuEdit} sx={actionButtonIconsStyle} onClick={handleRemoveClick}/> 
+                                        <Badge badgeContent={isCommentMode ? 'ON' : 'OFF'} color="success" >
+                                            <IconButton component={icons.sudokuComment} sx={actionButtonIconsStyle} onClick={handleCommentClick}/> 
+                                        </Badge>
+                                        <Badge badgeContent={numberOfHints} color="success" >
+                                            <IconButton component={icons.sudokuHint} sx={actionButtonIconsStyle} onClick={handleHintClick} disabled= {numberOfHints > 0 ? false : true} /> 
+                                        </Badge>
+                                        <p style={actionTextsStyle}> Annuler </p> <p style={actionTextsStyle}> Effacer </p> <p style={actionTextsStyle}> Notes </p> <p style={actionTextsStyle}> Indices</p>
+                                    </div>
+                                    <br />
+                                    <div style={answerBoardStyle}>
+                                        {renderAnswerBoard()} 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </>
+                        }
                         <div style={buttonDivStyle}>
                             <Button style={buttonStyle} onClick={restart}> Rejouer </Button>
                             <Link to="/jeux">

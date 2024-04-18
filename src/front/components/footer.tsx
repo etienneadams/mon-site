@@ -9,7 +9,6 @@ const Footer = () => {
 
     const footerStyle: React.CSSProperties = {
         padding: '1px',
-        //height: '10vh',
         bottom: '0',
     };
 

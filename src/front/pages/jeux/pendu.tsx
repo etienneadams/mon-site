@@ -7,9 +7,13 @@ import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EndGameDialog from '../../components/game/endGameDialog.tsx';
 import Texts from '../../components/game/texts.tsx';
+import { useMobile } from '../../components/contexts/mobileContext.tsx';
+import Canvas from '../../components/shape/canvas.tsx';
 
 
 const PenduGamePage = () => {
+    const { isMobile } = useMobile();
+
     const texts = Texts();
     
     const [word, setWord] = useState(() => {
@@ -32,7 +36,10 @@ const PenduGamePage = () => {
 
     useEffect(() => {
         if (life === 0) {
-            setGameLost(true);
+            const delay = 500;
+            setTimeout(() => {
+                setGameLost(true);
+            }, delay);
         }
     }, [life]);
 
@@ -104,11 +111,12 @@ const PenduGamePage = () => {
 
     const renderTriedLetters = () => {
         return strTry.split('').map((letter, index) => (
-            <span key={index} style={{ color: listWord.includes(letter) ? 'green' : 'red' }} className="word-letter">
+            <span key={index} style={{ color: listWord.includes(letter) && !completed ? 'green' : 'red' }} className="word-letter">
                 {letter}
             </span>
         ));
     };
+    
 
     const renderLifeIcons = () => {
     const lifeIcons: React.ReactNode[] = [];
@@ -135,13 +143,13 @@ const PenduGamePage = () => {
     };
 
     const renderKeyboard = () => {
-        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const alphabet = isMobile ? 'ABCDEFGHIJKLMNOPQRSTUVWX  YZ' : 'ABCDEFGHIJKLMNOPQRSTU VWXYZ';
         return alphabet.split('').map((letter, index) => (
           <Button
             key={index}
             onClick={() => handleKeyClick(letter.toLowerCase())}
             disabled={isKeyClicked(letter)}
-            style={{ margin: '2px', backgroundColor: isKeyClicked(letter) ? colors.disabledBlue : colors.royalBlue , color: 'white'}}
+            style={renderKeyboardStyle(letter)}
           >
             {letter}
           </Button>
@@ -173,36 +181,75 @@ const PenduGamePage = () => {
 
     const bodyStyle: React.CSSProperties = {
         backgroundColor: colors.lighterGray,
-        height: '80vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
     };
 
     const switchStyle: React.CSSProperties = {
-        float: 'right',
+        width: '100vw',
+        margin: '2vh',
     };
 
+    const gameAreaStyle: React.CSSProperties = {
+        display: isMobile ? 'flex' : 'grid',
+        gridTemplateColumns: 'repeat(2,1fr)',
+        gap: '5px',
+        marginBottom: isMobile ? '' : '10vh',
+    }
+
     const guessStyle: React.CSSProperties = {
+        width: isMobile ? '80vw' : 'auto',
         display: 'flex',
         justifyContent: 'center',
-        paddingTop: '60px',
-        height: '100px',
+        paddingTop: isMobile ? '2vh' : '60px',
+        height: isMobile ? '5vh' : '100px',
+        marginBottom: isMobile ? '6vh' : '',
     };
 
     const tryDivStyle: React.CSSProperties = {
+        justifySelf: 'start',
         wordSpacing: '20px',
         margin: '30px 20px',
     };
 
-    const keyboardStyle: React.CSSProperties = {
-        margin: 'auto',
-        justifyContent: 'center',
-        width: '650px',
-        height: '150px',
+    const inputLetterStyle: React.CSSProperties = {
+        display: 'flex',
+        margin: '7vh',
     };
+
+    const textFieldStyle: React.CSSProperties = {
+        width: '50px', 
+        marginLeft: '10px',
+        paddingTop: '8px',
+    }
+
+    const keyboardStyle: React.CSSProperties = {
+        margin: isMobile ? '6vh 0px' : '',
+        justifyContent: 'center',
+        justifyItems: 'center',
+        alignSelf: isMobile ? '' : 'center',
+        width: isMobile ? '90vw' : '40vw',
+        display: 'grid',
+        gridTemplateColumns: isMobile ? 'repeat(6,5fr)' : 'repeat(7,4fr)',
+    };
+
+    const renderKeyboardStyle = (letter: string): React.CSSProperties  => {
+        return {
+            fontSize: isMobile ? '3vw' : '',
+            width: isMobile ? '1vw' : '',
+            margin: '2px', 
+            backgroundColor: letter === ' ' ? 'transparent' : 
+                isKeyClicked(letter) ? colors.disabledBlue : colors.royalBlue , 
+            color: 'white',
+        }
+    }
 
     const buttonDivStyle: React.CSSProperties = {
         justifyContent: 'center',
         display: 'flex',
-        marginTop: '10px',
+        margin: '1vh',
     };
 
     const buttonStyle: React.CSSProperties = {
@@ -219,35 +266,73 @@ const PenduGamePage = () => {
             <GameNavbar drawerGoal={texts.penduGoalText} drawerHowPrePhrase={texts.penduHowPrePhraseText} drawerHow={texts.penduHow} drawerEnd={texts.penduEndText} />
         </header>
         <body style={bodyStyle}>
-            <div style={switchStyle}>
-                <FormControlLabel control={<Switch checked={switchChecked} onChange={() => setSwitchChecked(!switchChecked)} size='small' color='success'/>} label="Clavier"/>
-            </div>
-            <div style={guessStyle}>
-                {renderWordToDiscover()}
-            </div>
-            {switchChecked ?
+            {isMobile ? 
                 <>
-                    <div style={{marginBottom: '30px'}}>
-                        {renderLifeIcons()}
+                    <div style={switchStyle}>
+                        <FormControlLabel control={<Switch checked={switchChecked} onChange={() => setSwitchChecked(!switchChecked)} size='small' color='success'/>} label="Clavier"/>
                     </div>
-                    <div style={keyboardStyle}>
-                        {renderKeyboard()}
+                    <div style={guessStyle}>
+                        {renderWordToDiscover()}
                     </div>
-                </>
-            :   
+                    {switchChecked ?
+                        <>
+                            <div style={{justifyContent: 'center'}}>
+                                <Canvas life={life} />
+                            </div>
+                            <div style={keyboardStyle}>
+                                {renderKeyboard()}
+                            </div>
+                        </>
+                    :   
+                        <>
+                            <Canvas life={life} />
+                            <div style={tryDivStyle}>
+                                <h3>Essais : </h3>
+                                {renderTriedLetters()}
+                            </div>
+                            <div style={inputLetterStyle}>
+                                <p>Entrer une lettre : </p>
+                                <TextField type="text" size='small' style={textFieldStyle} onKeyDown={handleKeyDown} />
+                            </div>
+                        </>
+                    }
+                </> 
+            : 
                 <>
-                    <div style={tryDivStyle}>
-                        <p>Essais: </p>
-                        {renderTriedLetters()}
+                    <div style={switchStyle}>
+                        <FormControlLabel control={<Switch checked={switchChecked} onChange={() => setSwitchChecked(!switchChecked)} size='small' color='success'/>} label="Clavier"/>
                     </div>
-                    <div style={{marginBottom: '30px'}}>
-                        {renderLifeIcons()}
+                    <div style={guessStyle}>
+                        {renderWordToDiscover()}
                     </div>
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <p>Enter a letter: </p>
-                        <TextField type="text" size='small' style={{width: '50px'}} value={letterInput} onChange={(e) => setLetterInput(e.target.value)} onKeyDown={handleKeyDown} />
-                    </div>
+                    {switchChecked ?
+                        <>
+                            <div style={gameAreaStyle}>
+                                <Canvas life={life} />
+                                <div style={keyboardStyle}>
+                                    {renderKeyboard()}
+                                </div>
+                            </div>
+                        </>
+                    :   
+                        <>
+                            <div style={gameAreaStyle}>
+                                <Canvas life={life} />
+                                <div>
+                                    <div style={tryDivStyle}>
+                                        <h3>Essais : </h3>
+                                        {renderTriedLetters()}
+                                    </div>
+                                    <div style={inputLetterStyle}>
+                                        <p>Entrer une lettre : </p>
+                                        <TextField type="text" size='small' style={textFieldStyle} onKeyDown={handleKeyDown} />
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    }
                 </>
+            
             }
             <div style={buttonDivStyle}>
                 <Button style={buttonStyle} onClick={resetGame}> Rejouer </Button>

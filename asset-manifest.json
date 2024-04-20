@@ -1,18 +1,22 @@
 {
   "files": {
     "main.css": "/mon-site/static/css/main.5a9d7bb5.css",
-    "main.js": "/mon-site/static/js/main.da39e638.js",
+    "main.js": "/mon-site/static/js/main.4ad8c2fa.js",
+    "static/media/FondLinkedin2021.png": "/mon-site/static/media/FondLinkedin2021.7741a3dfb8b99afc9243.png",
+    "static/media/profile.JPEG": "/mon-site/static/media/profile.c540fe1a2f9b8bf852fd.JPEG",
     "static/media/mountain_landscape.png": "/mon-site/static/media/mountain_landscape.edee9a1d0fbf9c49ca55.png",
     "static/media/Puissance 4.png": "/mon-site/static/media/Puissance 4.a8f0ac81effc24102b10.png",
     "static/media/etienne-adamczuk-logo.png": "/mon-site/static/media/etienne-adamczuk-logo.870d82a1ea0337278ff2.png",
     "static/media/minesweeper.jpg": "/mon-site/static/media/minesweeper.235e20a84f731178c078.jpg",
+    "static/media/Logo BL entier.png": "/mon-site/static/media/Logo BL entier.3157014ce7095fa3f472.png",
     "static/media/Tic Tac Toe.png": "/mon-site/static/media/Tic Tac Toe.7b6cf3c372517f72c58e.png",
+    "static/media/scoBrooball.jpg": "/mon-site/static/media/scoBrooball.03bd2b78250748084fc4.jpg",
     "index.html": "/mon-site/index.html",
     "main.5a9d7bb5.css.map": "/mon-site/static/css/main.5a9d7bb5.css.map",
-    "main.da39e638.js.map": "/mon-site/static/js/main.da39e638.js.map"
+    "main.4ad8c2fa.js.map": "/mon-site/static/js/main.4ad8c2fa.js.map"
   },
   "entrypoints": [
     "static/css/main.5a9d7bb5.css",
-    "static/js/main.da39e638.js"
+    "static/js/main.4ad8c2fa.js"
   ]
 }

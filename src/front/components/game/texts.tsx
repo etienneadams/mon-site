@@ -1,4 +1,6 @@
 const texts = () => {
+    // Accueil
+    const lorem = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem fuga, dignissimos voluptatibus quo ipsam sunt molestias, quae libero repellat praesentium assumenda veniam nemo qui expedita, suscipit temporibus maiores alias facere."
     // pendu
     const penduWords = [
         'lunette', 'ordinateur', 'tableau', 'serpilliere', 'chocolat', 'etude', 'evenement', 'maison', 'obligation', 'polyvalence', 'twingo',
@@ -92,7 +94,7 @@ const texts = () => {
                                 [4,9,5,2,3,8,6,1,7],
                                 [2,7,9,4,6,3,8,5,1],
                                 [8,4,3,1,2,5,7,6,9],
-                                [1,5,6,7,8,9,3,4,0]] // 2
+                                [1,5,6,7,8,9,3,4,0]] // remain 2
 
     const sudokuMediumGrid1 = [[3,2,0,7,0,0,0,9,0],
                               [8,0,0,4,0,0,2,0,0],
@@ -124,6 +126,16 @@ const texts = () => {
                             [0,6,0,0,0,0,0,0,9],
                             [0,0,0,0,0,0,0,2,3]]
 
+    const sudokuHardGrid1Solved = [[6,8,3,1,0,0,0,0,0],
+                                  [0,0,0,0,0,5,7,1,0],
+                                  [0,0,0,0,0,0,0,0,0],
+                                  [5,0,9,0,0,4,2,0,0],
+                                  [0,0,0,8,0,0,0,0,0],
+                                  [0,4,0,0,0,0,0,9,0],
+                                  [1,3,0,2,0,6,4,0,0],
+                                  [0,6,0,0,0,0,0,0,9],
+                                  [0,0,0,0,0,0,0,2,3]]
+
     const sudokuExpertGrid1 = [[0,0,5,8,0,0,0,0,0],
                               [2,0,0,0,0,0,0,0,0],
                               [0,0,0,0,0,6,7,4,3],
@@ -154,16 +166,26 @@ const texts = () => {
                                 [8,3,0,0,1,0,0,0,0],
                                 [0,0,1,0,0,2,0,0,6]]
 
+    const sudokuMasterGrid1Solved = [[0,0,4,0,0,0,0,8,0],
+                                    [2,0,0,7,0,0,0,0,0],
+                                    [0,6,0,0,0,8,0,0,9],
+                                    [0,0,5,4,0,0,0,0,0],
+                                    [1,0,0,0,0,5,0,0,2],
+                                    [0,0,0,0,0,0,0,9,0],
+                                    [0,0,6,0,0,9,3,0,5],
+                                    [8,3,0,0,1,0,0,0,0],
+                                    [0,0,1,0,0,2,0,0,6]]
+
     const sudokuEasyGrids = [sudokuEasyGrid1]
     const sudokuEasySolvedGrids = [sudokuEasyGrid1Solved]
     const sudokuMediumGrids= [sudokuMediumGrid1]
     const sudokuMediumSolvedGrids = [sudokuMediumGrid1Solved]
     const sudokuHardGrids = [sudokuHardGrid1]
-    const sudokuHardSolvedGrids = []
+    const sudokuHardSolvedGrids = [sudokuHardGrid1Solved]
     const sudokuExpertGrids = [sudokuExpertGrid1]
-    const sudokuExpertSolvedGrids = []
+    const sudokuExpertSolvedGrids = [sudokuExpertGrid1Solved]
     const sudokuMasterGrids = [sudokuMasterGrid1]
-    const sudokuMasterSolvedGrids = []
+    const sudokuMasterSolvedGrids = [sudokuMasterGrid1Solved]
 
     // Travle
     const travleGoalText = 'Le but du jeu Travle est de relier deux pays en créant un chemin constitué des pays qui les relient. Le joueur devra utiliser leur connaissance géographique pour trouver la séquence de pays permettant de relier efficacement le point de départ au point d\'arrivée.';
@@ -176,13 +198,17 @@ const texts = () => {
 
     // light mode
 
-    return {penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
+    return {lorem,
+            penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
             morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText,
             puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,
             demineurGoalText, demineurHow, demineurEndText, demineurOptions,
             travleGoalText, travleHow, travleEndText, 
             sudokuGoalText, sudokuHow, sudokuEndText, sudokuOptions, 
-            sudokuEasyGrids, sudokuEasySolvedGrids, sudokuEasyGrid1Test, sudokuMediumGrids, sudokuMediumSolvedGrids, sudokuHardGrids, sudokuExpertGrids, sudokuMasterGrids};
+            sudokuEasyGrids, sudokuEasySolvedGrids, sudokuEasyGrid1Test, 
+            sudokuMediumGrids, sudokuMediumSolvedGrids, sudokuHardGrids, sudokuExpertGrids, sudokuMasterGrids,
+            sudokuHardSolvedGrids, sudokuExpertSolvedGrids, sudokuMasterSolvedGrids
+        };
 }
 
 export default texts;

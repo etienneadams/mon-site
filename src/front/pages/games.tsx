@@ -3,13 +3,13 @@ import Footer from "../components/footer.tsx";
 import Navbar from "../components/navigation/navbar.tsx";
 import Colors from "../colors/colors.tsx";
 import GameCard from "../components/game/gameCard.tsx";
-import TicTacToeImage from "../assets/Tic Tac Toe.png";
-import P4Image from "../assets/Puissance 4.png";
-import PenduImage from "../assets/Pendu.png";
-import BombImage from "../assets/minesweeper.jpg";
-import TravleImage from "../assets/travle.png";
-import SudokuImage from "../assets/sudoku.png";
-import EchecImage from "../assets/echec.png";
+import TicTacToeImage from "../assets/jeux/Tic Tac Toe.png";
+import P4Image from "../assets/jeux/Puissance 4.png";
+import PenduImage from "../assets/jeux/Pendu.png";
+import BombImage from "../assets/jeux/minesweeper.jpg";
+import TravleImage from "../assets/jeux/travle.png";
+import SudokuImage from "../assets/jeux/sudoku.png";
+import EchecImage from "../assets/jeux/echec.png";
 
 const GamePage = () => {
 

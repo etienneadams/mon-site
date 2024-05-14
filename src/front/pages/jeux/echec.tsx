@@ -3,11 +3,20 @@ import Footer from "../../components/footer.tsx";
 import GameNavbar from "../../components/navigation/gameNavbar.tsx";
 import Texts from "../../components/game/texts.tsx";
 import InMaintenancePage from "../inMaintenance.tsx";
+import Colors from "../../colors/colors.tsx";
 
 const EchecGamePage = () => {
     const inBuilding = false;
     const inMaintenance = true;
     const texts = Texts();
+
+    // CSS
+
+    const colors = Colors()
+
+    const bodyStyle: React.CSSProperties = {
+        backgroundColor: colors.lightGray,
+    }
     
     return (
         <>
@@ -17,13 +26,14 @@ const EchecGamePage = () => {
             { inMaintenance ? <InMaintenancePage />
             : 
             <>            
-                <body>
+                <body style={bodyStyle}>
                     EchecGamePage
                 </body>
                 <footer>
                     <Footer />
                 </footer>
-            </>}
+            </>
+            }
         </>
     )
 };

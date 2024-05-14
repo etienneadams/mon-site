@@ -1,6 +1,19 @@
 const texts = () => {
     // Accueil
     const lorem = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem fuga, dignissimos voluptatibus quo ipsam sunt molestias, quae libero repellat praesentium assumenda veniam nemo qui expedita, suscipit temporibus maiores alias facere."
+
+    const presentation = "Enchanté, je suis Etienne, 23 ans, angevin et developpeur passionné. Sur mon site, vous découvrirez une brève présentation de mes activités actuelles sur cette page et une explication plus détaillé de mon parcours scolaire et professionnel via une seconde page dédiée. Enfin explorez mes réalisations, sur la page des jeux et n'hésitez pas à me contacter pour en discuter ou pour toute contribution. Retrouvez également mes réseaux sociaux sur ma page de contact."
+
+    const spikeeLabs = "Je suis actuellement en contrat de professionnalisation au sein de l'entreprise SpikeeLabs en tant que développeur Fullstack. Je travaille essentiellement sur une solution B2B de gestion de forfait téléphonique, développée par SpikeeLabs. De l'ajout de composant dans le design system, à la gestion des migrations Django en passant par des tests E2E; je suis amené à travailler sur plusieurs aspects du projet qui me permettent d'enrichir mes compétences techniques."
+
+    const broomball = "Je pratique le Broomball depuis septembre 2023, on m'a parlé de ce sport alors que souhaitais faire du hockey en loisirs mais plus de place dans les équipes. Ce sport se rapproche du hockey à la différence près qu'il se joue en chaussure sur la glace, avec une balle et un balai (broom). Encore très peu développé en France néanmoins les championnats du Monde 2024 se dérouleront du 21 au 26 octobre à Megève (74)"
+
+    const running = "Suite à la course de 10km du bioparc de Doué-la-Fontaine, je me suis mis à la course à pied avec comme objectif de réaliser un Semi-Marathon en mai dernier. Objectif atteint en 2h14 sans marche ni pause, pour une première c'est pas si mal; rendez-vous en avril 2025 pour mon premier triathlon."
+
+    const hockey = "Très grand fan de hockey, j'adorais aller voir des matchs; j'aimais tout : l'ambiance, la beauté du jeu mais aussi les bagarres. Quel fut mon plaisir quand j'ai su que je pouvais devenir bénévole de cette belle équipe. Je peux donc désormais aller voir tous les matchs à domicile (en surveillant les gradins), avoir des moments de partage avec les autres bénévoles et les joueurs après les matchs."
+
+    const reading = "Dans une volonté de progresser et d'engranger davantage de vocabulaire en anglais je me suis lancé dans la lecture des 8 tomes de cette incroyable saga en version originale. J'en suis actuellement à la moitié du second tome qui s'intitule 'Harry Potter and the Chamber of Secrets' (j'espère que vous l'aviez)"
+
     // pendu
     const penduWords = [
         'lunette', 'ordinateur', 'tableau', 'serpilliere', 'chocolat', 'etude', 'evenement', 'maison', 'obligation', 'polyvalence', 'twingo',
@@ -198,7 +211,7 @@ const texts = () => {
 
     // light mode
 
-    return {lorem,
+    return {lorem, presentation, spikeeLabs, broomball, running, hockey, reading,
             penduWords, penduGoalText, penduEndText, penduHowPrePhraseText, penduHow, penduWinText, penduLoseText,
             morpionGoalText, morpionHowPrePhraseText, morpionHow, morpionEndText,
             puissance4GoalText, puissance4HowPrePhraseText, puissance4How, puissance4EndText,

@@ -1,11 +1,13 @@
 import React from "react"
 import { FunctionComponent } from "react"
+import { useMobile } from "./contexts/mobileContext.tsx"
 
 type Props = {
     text: string
 }
 
 const Paragraph: FunctionComponent<Props> = (props: Props) => {
+    const { isMobile } = useMobile()
 
     const bigFirstLetter = (text: string) => {
         let firstLetter = text.substring(0,1)
@@ -18,7 +20,7 @@ const Paragraph: FunctionComponent<Props> = (props: Props) => {
     const textStyle: React.CSSProperties = {
         textAlign: 'justify',
         textJustify: 'auto',
-        fontSize: '2vw',
+        fontSize: isMobile ? '2vw' : '',
     }
 
     const firstLetterStyle : React.CSSProperties = {

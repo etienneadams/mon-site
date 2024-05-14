@@ -61,11 +61,11 @@ const HomePage = () => {
                     :
                     <>
                         <body style={bodyStyle}>
-                            <InfoSection title={"Présentation"} texts={["Etienne. " + texts.lorem]} carousel={Profile} picLeft={true} />
+                            <InfoSection title={"Présentation"} texts={[texts.presentation]} carousel={Profile} picLeft={true} />
                             {/* TODO: mettre vidéo BL à la place */}
-                            <InfoSection title={"Professionnel"} banner={Banner} texts={["SpikeeLabs. " + texts.lorem]} carousel={LogoBL} picLeft={false} />
-                            <InfoSection title={"Sport"} texts={["Broomball. " + texts.lorem, "Course à pied. " + texts.lorem]} carousel={LogoSCO} picLeft={true} />
-                            <InfoSection title={"Temps libre"} texts={["Bénévoles Ducs. " + texts.lorem, "Harry Potter. " + texts.lorem]} carousel={LogoDucs} picLeft={false} />
+                            <InfoSection title={"Professionnel"} banner={Banner} texts={[texts.spikeeLabs]} carousel={LogoBL} picLeft={false} />
+                            <InfoSection title={"Sport"} texts={[texts.broomball, texts.running]} carousel={LogoSCO} picLeft={true} />
+                            <InfoSection title={"Temps libre"} texts={[texts.hockey, texts.reading]} carousel={LogoDucs} picLeft={false} />
                         </body>
                         <footer>
                             <Footer/>
